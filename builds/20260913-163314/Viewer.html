@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Luma 3D Model</title>
+<meta name="description" content="Interactive 3D viewer for the Luma retrofit reader CAD model. Opens offline from disk; no CAD software required.">
+<style>
+:root{--bg:#e9f0f2;--bg2:#d3e0e3;--panel:#ffffff;--ink:#173b48;--muted:#587280;--line:#d5e3e6;--accent:#007b80;--accent-ink:#ffffff;--head:#103a46;--head-ink:#e5f1f2;--head-muted:#9fc0c7;--hover:#eef6f7;--grid:#9fb3ba;--edge:#20343d;--warn:#8a5a1f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1d22;--bg2:#08181d;--panel:#14262c;--ink:#dcebee;--muted:#8aa5ad;--line:#25414a;--accent:#45b8b9;--accent-ink:#06282b;--head:#0a171b;--head-ink:#dcebee;--head-muted:#86a6ae;--hover:#1b333a;--grid:#3a5760;--edge:#0a1418;--warn:#e0a860}}
+:root[data-theme="dark"]{--bg:#0f1d22;--bg2:#08181d;--panel:#14262c;--ink:#dcebee;--muted:#8aa5ad;--line:#25414a;--accent:#45b8b9;--accent-ink:#06282b;--head:#0a171b;--head-ink:#dcebee;--head-muted:#86a6ae;--hover:#1b333a;--grid:#3a5760;--edge:#0a1418;--warn:#e0a860}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;display:flex;flex-direction:column;overflow:hidden}
+header{background:var(--head);color:var(--head-ink);display:flex;align-items:center;gap:16px;padding:10px 16px;flex-wrap:wrap}
+.brand{display:flex;flex-direction:column;line-height:1.15;margin-right:auto}
+.brand b{font-size:17px;letter-spacing:-.2px}
+.brand span{font-size:12px;color:var(--head-muted)}
+header a{color:var(--head-ink);text-decoration:none;border:1px solid rgba(255,255,255,.25);padding:6px 12px;border-radius:8px;font-size:13px;white-space:nowrap}
+header a:hover{background:rgba(255,255,255,.1)}
+select,button,input{font:inherit;color:inherit}
+.cfg{display:flex;align-items:center;gap:8px}
+.cfg label{font-size:12px;color:var(--head-muted)}
+.cfg select{background:rgba(255,255,255,.08);color:var(--head-ink);border:1px solid rgba(255,255,255,.25);border-radius:8px;padding:6px 10px;max-width:62vw}
+.cfg select option,.cfg select optgroup{color:#173b48;background:#fff}
+main{flex:1;display:flex;min-height:0}
+#stage{flex:1;position:relative;min-width:0;min-height:0;background:radial-gradient(ellipse at 50% 35%,var(--bg) 0%,var(--bg2) 100%)}
+canvas{position:absolute;inset:0;display:block;width:100%;height:100%;outline:none;touch-action:none}
+.toolbar{position:absolute;top:12px;left:12px;right:12px;display:flex;gap:8px;flex-wrap:wrap;pointer-events:none}
+.toolbar>*{pointer-events:auto}
+.seg{display:inline-flex;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.seg button{background:none;border:0;padding:7px 11px;cursor:pointer;border-right:1px solid var(--line);font-size:13px}
+.seg button:last-child{border-right:0}
+.seg button:hover{background:var(--hover)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.help{position:absolute;left:12px;bottom:12px;font-size:12px;color:var(--muted);background:color-mix(in srgb,var(--panel) 80%,transparent);padding:6px 10px;border-radius:8px;pointer-events:none}
+.tip{position:absolute;pointer-events:none;background:var(--head);color:var(--head-ink);padding:4px 8px;border-radius:6px;font-size:12px;white-space:nowrap;transform:translate(12px,12px);display:none}
+aside{width:320px;flex:none;background:var(--panel);border-left:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.info{padding:14px 16px;border-bottom:1px solid var(--line)}
+.info h2{font-size:15px;margin:0 0 2px;word-break:break-word}
+.info .muted{color:var(--muted);font-size:12px}
+.info dl{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;margin:10px 0 0;font-size:13px}
+.info dt{color:var(--muted)}
+.info dd{margin:0;word-break:break-word}
+.info .actions{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.btn{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:5px 10px;cursor:pointer;font-size:13px}
+.btn:hover{background:var(--hover)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.search{padding:10px 16px;border-bottom:1px solid var(--line);display:flex;gap:6px}
+.search input{flex:1;min-width:0;padding:7px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg)}
+ul{list-style:none;margin:0;padding:0 0 12px;overflow:auto;flex:1}
+li.group{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);padding:12px 16px 4px}
+li.part{display:flex;align-items:center;gap:8px;padding:5px 10px 5px 16px;cursor:pointer;font-size:13px}
+li.part:hover{background:var(--hover)}
+li.part.sel{background:var(--accent);color:var(--accent-ink)}
+li.part.off{opacity:.45}
+li.part .sw{width:11px;height:11px;border-radius:3px;flex:none;border:1px solid rgba(0,0,0,.25)}
+li.part .nm{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+li.part .eye{background:none;border:0;cursor:pointer;padding:0 4px;font-size:14px;opacity:.7;color:inherit}
+li.part .eye:hover{opacity:1}
+.note{font-size:12px;color:var(--warn);padding:10px 16px;border-top:1px solid var(--line)}
+#loading,#fail{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:24px;color:var(--muted)}
+#fail{display:none;color:var(--ink)}
+#fail div{max-width:520px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px}
+.panelToggle{display:none}
+@media (max-width:760px){
+ header{gap:10px;padding:8px 12px}
+ .cfg label{display:none}
+ main{flex-direction:column}
+ aside{width:auto;height:42vh;border-left:0;border-top:1px solid var(--line);display:none}
+ body.panel aside{display:flex}
+ .panelToggle{display:inline-block}
+ .help{display:none}
+}
+</style>
+</head>
+<body>
+<header>
+ <div class="brand"><b>Luma Retrofit · 3D model</b><span id="meta">Engineering prototype · Rev A</span></div>
+ <div class="cfg"><label for="config">Configuration</label><select id="config" aria-label="Configuration"></select></div>
+ <a href="Review.html">Design review</a>
+</header>
+<main>
+ <div id="stage">
+  <div id="loading">Loading model…</div>
+  <div id="fail"><div id="failText"></div></div>
+  <div class="toolbar">
+   <div class="seg" role="group" aria-label="View">
+    <button data-view="iso" title="Isometric (1)">Iso</button><button data-view="front" title="Front (2)">Front</button><button data-view="right" title="Right (3)">Right</button><button data-view="top" title="Top (4)">Top</button><button data-view="back" title="Back (5)">Back</button><button id="fit" title="Fit to screen (F)">Fit</button>
+   </div>
+   <div class="seg" role="group" aria-label="Display">
+    <button id="xray" aria-pressed="false" title="See through the housing (X)">X-ray</button><button id="edges" aria-pressed="true" title="Show edge lines (E)">Edges</button><button id="shot" title="Save a PNG of this view">Screenshot</button>
+   </div>
+   <div class="seg panelToggle"><button id="panelBtn" aria-pressed="false">Parts</button></div>
+  </div>
+  <div class="help">Left-drag rotate · Right-drag pan · Scroll zoom · Click a part for details · Double-click to zoom to it</div>
+  <div class="tip" id="tip"></div>
+ </div>
+ <aside>
+  <div class="info" id="info"></div>
+  <div class="search"><input id="q" type="search" placeholder="Filter parts" aria-label="Filter parts"><button class="btn" id="showAll" title="Show every part">Show all</button></div>
+  <ul id="list"></ul>
+  <div class="note">Engineering prototype, not a fabrication release. See ENGINEERING.md for assumptions and open work.</div>
+ </aside>
+</main>
+<script src="viewer/three.min.js"></script>
+<script src="viewer/OrbitControls.js"></script>
+<script src="viewer/model-data.js"></script>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+function fail(msg){$('loading').style.display='none';$('fail').style.display='flex';$('failText').innerHTML=msg;}
+const M=window.LUMA_MODEL;
+if(!window.THREE||!THREE.OrbitControls){fail('<b>The viewer library did not load.</b><br>Keep <code>Viewer.html</code> next to its <code>viewer</code> folder. If you are looking at this on github.com, download the repository (Code → Download ZIP), unzip it and open the file from disk.');return;}
+if(!M){fail('<b>The model data did not load.</b><br><code>viewer/model-data.js</code> is missing. Download the whole repository (Code → Download ZIP), unzip it, and open <code>START.html</code>.');return;}
+
+const MOUNTS={Partition:'Partition clamp',Rail:'Rail clamp',Hook:'Over-partition hook',Pedestal:'Floor pedestal',Smooth:'Smooth-surface pads',Magnetic:'Magnetic mount'};
+const HOUSING=/^(0[1-5]|1[5-7])_/;
+function label(n){let m=n.match(/^([A-Za-z]+)_(DC|Battery)$/);if(m&&MOUNTS[m[1]])return MOUNTS[m[1]]+' — '+(m[2]==='DC'?'DC power':'battery');m=n.match(/^Installed_([A-Za-z]+)$/);if(m)return (MOUNTS[m[1]]||m[1])+' — on host (illustrative)';if(n==='Service_Open')return 'Service access — covers removed';if(n==='Exploded')return 'Exploded parts layout';return n.replace(/_/g,' ');}
+function groupOf(n){if(/_(DC|Battery)$/.test(n)&&MOUNTS[n.split('_')[0]])return 'Mounting and power options';if(/^Installed_/.test(n))return 'Installed on host';if(n==='Service_Open'||n==='Exploded')return 'Service and exploded';return 'Other SolidWorks configurations';}
+function pretty(p){return p.replace(/^REFERENCE_/,'Host reference: ').replace(/_/g,' ');}
+function partGroup(p){const g=(M.parts[p].info||{}).group||'';if(p.startsWith('REFERENCE_'))return 'Host reference';if(g==='Core')return 'Reader';if(g==='DC'||g==='Battery')return 'Power';if(g.startsWith('Mount_'))return 'Mount';return 'Other';}
+const GROUP_ORDER=['Reader','Power','Mount','Host reference','Other'];
+
+// Configuration picker
+const sel=$('config'),groups={};
+for(const c of M.configurations){const g=groupOf(c.name);if(!groups[g]){groups[g]=document.createElement('optgroup');groups[g].label=g;}const o=document.createElement('option');o.value=c.name;o.textContent=label(c.name);if(c.description)o.title=c.description;groups[g].appendChild(o);}
+for(const g of ['Mounting and power options','Installed on host','Service and exploded','Other SolidWorks configurations'])if(groups[g])sel.appendChild(groups[g]);
+$('meta').textContent='Engineering prototype · Rev A · build '+M.build;
+
+// Renderer
+const stage=$('stage');
+let renderer;
+try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,preserveDrawingBuffer:true});}catch(e){fail('<b>WebGL is not available in this browser.</b><br>Try a current Chrome, Edge or Firefox, or open the STEP files from <code>exports/step</code> in a CAD program.');return;}
+renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,2));
+stage.insertBefore(renderer.domElement,stage.firstChild);
+renderer.domElement.tabIndex=0;
+const scene=new THREE.Scene();
+const camera=new THREE.PerspectiveCamera(35,1,1,100000);
+scene.add(camera);
+scene.add(new THREE.HemisphereLight(0xffffff,0x4a5c64,0.8));
+const key=new THREE.DirectionalLight(0xffffff,0.55);key.position.set(0.6,1,0.8);camera.add(key);
+const rim=new THREE.DirectionalLight(0xffffff,0.18);rim.position.set(-1,-0.4,-0.6);camera.add(rim);
+const controls=new THREE.OrbitControls(camera,renderer.domElement);
+controls.enableDamping=true;controls.dampingFactor=0.12;controls.screenSpacePanning=true;
+const root=new THREE.Group();scene.add(root);
+let grid=null;
+
+let needs=true;const request=()=>{needs=true;};
+controls.addEventListener('change',request);
+function resize(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);camera.aspect=w/Math.max(h,1);camera.updateProjectionMatrix();request();}
+new ResizeObserver(resize).observe(stage);
+
+// Geometry (shared per part) and materials (one per placed component)
+const buf=s=>{const b=atob(s),u=new Uint8Array(b.length);for(let i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u.buffer;};
+const geoms={},edgeGeoms={};
+function geometry(p){if(geoms[p])return geoms[p];const d=M.parts[p],g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(new Float32Array(buf(d.p)),3));g.setAttribute('normal',new THREE.BufferAttribute(new Int8Array(buf(d.n)),3,true));g.setIndex(new THREE.BufferAttribute(d.i32?new Uint32Array(buf(d.i)):new Uint16Array(buf(d.i)),1));g.computeBoundingBox();g.computeBoundingSphere();return geoms[p]=g;}
+function edgeGeometry(p){return edgeGeoms[p]||(edgeGeoms[p]=new THREE.EdgesGeometry(geometry(p),28));}
+const css=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+const edgeMat=new THREE.LineBasicMaterial({color:css('--edge'),transparent:true,opacity:0.45});
+function material(c){const info=M.parts[c.part].info||{},mat=(info.material||'').toLowerCase(),rgb=c.color||[0.79,0.84,0.86];
+ const steel=mat.includes('steel'),rubber=mat.includes('epdm')||mat.includes('black');
+ const m=new THREE.MeshPhongMaterial({color:new THREE.Color(rgb[0],rgb[1],rgb[2]),shininess:steel?70:rubber?6:28,specular:steel?0x777777:0x222222,polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1});
+ if(c.part.startsWith('REFERENCE_')){m.transparent=true;m.opacity=0.55;m.depthWrite=false;}
+ m.userData.base={transparent:m.transparent,opacity:m.opacity,depthWrite:m.depthWrite};return m;}
+
+// State
+let meshes=[],selected=null,hovered=null,isolated=false,xray=false,edges=true,current=null;
+const hidden=new Set();
+
+function load(name,refit){
+ const cfg=M.configurations.find(c=>c.name===name)||M.configurations[0];current=cfg;sel.value=cfg.name;
+ for(const m of meshes){m.material.dispose();root.remove(m);}
+ meshes=[];selected=null;hovered=null;isolated=false;hidden.clear();
+ const seen={};
+ for(const c of cfg.components){if(!M.parts[c.part])continue;const mesh=new THREE.Mesh(geometry(c.part),material(c));mesh.matrixAutoUpdate=false;mesh.matrix.fromArray(c.e);mesh.userData.c=c;seen[c.part]=(seen[c.part]||0)+1;mesh.userData.n=seen[c.part];
+  const e=new THREE.LineSegments(edgeGeometry(c.part),edgeMat);e.visible=edges;e.raycast=()=>{};mesh.add(e);mesh.userData.edges=e;root.add(mesh);meshes.push(mesh);}
+ for(const m of meshes)m.userData.label=pretty(m.userData.c.part)+(seen[m.userData.c.part]>1?' #'+m.userData.n:'');
+ root.updateMatrixWorld(true);
+ applyDisplay();buildList();showInfo();placeGrid();
+ if(refit)fit(null,false);
+ history.replaceState(null,'','#'+cfg.name);request();
+}
+function visibleMeshes(){return meshes.filter(m=>m.visible);}
+function applyDisplay(){for(const m of meshes){const b=m.material.userData.base,housing=HOUSING.test(m.userData.c.part),ghost=xray&&housing&&m!==selected;
+  m.visible=!hidden.has(m)&&(!isolated||m===selected);
+  m.material.transparent=ghost||b.transparent;m.material.opacity=ghost?0.14:b.opacity;m.material.depthWrite=ghost?false:b.depthWrite;m.renderOrder=ghost?2:0;
+  m.material.emissive.setHex(m===selected?0x0b6570:m===hovered?0x0a3540:0x000000);
+  m.userData.edges.visible=edges&&!ghost;m.material.needsUpdate=true;}
+ request();}
+function box(list){const b=new THREE.Box3();for(const m of list)b.union(new THREE.Box3().setFromObject(m));return b;}
+function placeGrid(){if(grid){scene.remove(grid);grid.geometry.dispose();grid.material.dispose();}const b=box(meshes);if(b.isEmpty())return;const s=b.getSize(new THREE.Vector3()),c=b.getCenter(new THREE.Vector3());
+ const size=Math.ceil(Math.max(s.x,s.z,300)*1.8/100)*100,cell=size>1500?100:50;grid=new THREE.GridHelper(size,Math.min(size/cell,120),css('--grid'),css('--grid'));grid.material.transparent=true;grid.material.opacity=0.35;grid.material.depthWrite=false;grid.position.set(c.x,b.min.y-1,c.z);scene.add(grid);}
+
+// Camera
+const VIEWS={iso:[1,0.8,1.15],front:[0,0,1],right:[1,0,0],top:[0,1,0.0001],back:[0,0,-1]};
+let anim=null;
+function fit(dir,smooth=true,target){const list=target?[target]:visibleMeshes();const b=box(list.length?list:meshes);if(b.isEmpty())return;
+ const sphere=b.getBoundingSphere(new THREE.Sphere()),r=Math.max(sphere.radius,5);
+ const d=(dir?new THREE.Vector3(...dir):camera.position.clone().sub(controls.target)).normalize();
+ const fov=camera.fov*Math.PI/180,dist=r/Math.sin(Math.min(fov,fov*camera.aspect)/2)*1.08;
+ const toPos=sphere.center.clone().add(d.multiplyScalar(dist)),toTarget=sphere.center.clone();
+ camera.near=Math.max(dist/200,0.5);camera.far=dist*60;camera.updateProjectionMatrix();
+ if(!smooth){camera.position.copy(toPos);controls.target.copy(toTarget);controls.update();request();return;}
+ anim={t0:performance.now(),fromPos:camera.position.clone(),fromTarget:controls.target.clone(),toPos,toTarget};request();}
+function step(now){if(!anim)return;const k=Math.min((now-anim.t0)/450,1),e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;
+ camera.position.lerpVectors(anim.fromPos,anim.toPos,e);controls.target.lerpVectors(anim.fromTarget,anim.toTarget,e);if(k>=1)anim=null;request();}
+
+// Picking
+const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
+function pick(ev){const r=renderer.domElement.getBoundingClientRect();ndc.set((ev.clientX-r.left)/r.width*2-1,-(ev.clientY-r.top)/r.height*2+1);ray.setFromCamera(ndc,camera);
+ const hits=ray.intersectObjects(visibleMeshes(),false);for(const h of hits){const m=h.object;if(xray&&HOUSING.test(m.userData.c.part)&&m!==selected)continue;return m;}return null;}
+let down=null;
+renderer.domElement.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY};});
+renderer.domElement.addEventListener('pointerup',e=>{if(down&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<5&&e.button===0)select(pick(e));down=null;});
+renderer.domElement.addEventListener('dblclick',e=>{const m=pick(e);if(m){select(m);fit(null,true,m);}else fit(null,true);});
+let pending=null;
+renderer.domElement.addEventListener('pointermove',e=>{if(e.buttons){tip.style.display='none';return;}if(pending)return;pending=requestAnimationFrame(()=>{pending=null;const m=pick(e);if(m!==hovered){hovered=m;applyDisplay();}
+ if(m){tip.textContent=m.userData.label;tip.style.display='block';const r=stage.getBoundingClientRect();tip.style.left=(e.clientX-r.left)+'px';tip.style.top=(e.clientY-r.top)+'px';}else tip.style.display='none';});});
+renderer.domElement.addEventListener('pointerleave',()=>{tip.style.display='none';if(hovered){hovered=null;applyDisplay();}});
+const tip=$('tip');
+
+function select(m){selected=m;if(!m&&isolated)isolated=false;applyDisplay();showInfo();markList();if(m){const li=document.querySelector('li.part.sel');if(li)li.scrollIntoView({block:'nearest'});}}
+
+// Side panel
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function showInfo(){const el=$('info');
+ if(!selected){const n=meshes.length,h=meshes.filter(m=>!m.visible).length;el.innerHTML=`<h2>${esc(label(current.name))}</h2><div class="muted">SolidWorks configuration <b>${esc(current.name)}</b></div>${current.description&&current.description!==current.name?`<p class="muted" style="margin:8px 0 0">${esc(current.description)}</p>`:''}<dl><dt>Components</dt><dd>${n}${h?` (${h} hidden)`:''}</dd><dt>Units</dt><dd>millimetres</dd></dl><p class="muted" style="margin:10px 0 0">Click a part in the model or the list below for its material and size.</p>`;return;}
+ const c=selected.userData.c,i=M.parts[c.part].info||{};
+ el.innerHTML=`<h2>${esc(selected.userData.label)}</h2><div class="muted">${esc(partGroup(c.part))}</div><dl>${i.material?`<dt>Material</dt><dd>${esc(i.material)}</dd>`:''}${i.process?`<dt>Process</dt><dd>${esc(i.process)}</dd>`:''}${i.envelope?`<dt>Envelope</dt><dd>${esc(i.envelope)}</dd>`:''}${i.group&&!i.material?`<dt>Note</dt><dd>${esc(i.group)}</dd>`:''}<dt>CAD file</dt><dd>parts/${esc(c.part)}.SLDPRT</dd><dt>Mesh</dt><dd>exports/stl/${esc(c.part)}.stl</dd></dl><div class="actions"><button class="btn primary" id="iso">${isolated?'Show all':'Isolate'}</button><button class="btn" id="hide">Hide</button><button class="btn" id="zoom">Zoom to</button><button class="btn" id="clear">Clear</button></div>`;
+ $('iso').onclick=()=>{isolated=!isolated;applyDisplay();showInfo();markList();fit(null,true,isolated?selected:null);};
+ $('hide').onclick=()=>{hidden.add(selected);select(null);};
+ $('zoom').onclick=()=>fit(null,true,selected);
+ $('clear').onclick=()=>select(null);}
+function buildList(){const ul=$('list');ul.innerHTML='';const by={};for(const m of meshes)(by[partGroup(m.userData.c.part)]=by[partGroup(m.userData.c.part)]||[]).push(m);
+ for(const g of GROUP_ORDER){if(!by[g])continue;const h=document.createElement('li');h.className='group';h.textContent=g+' ('+by[g].length+')';h.dataset.group=g;ul.appendChild(h);
+  for(const m of by[g].sort((a,b)=>a.userData.label.localeCompare(b.userData.label,undefined,{numeric:true}))){const li=document.createElement('li');li.className='part';li.dataset.group=g;li._m=m;const col='#'+m.material.color.getHexString();
+   li.innerHTML=`<span class="sw" style="background:${col}"></span><span class="nm">${esc(m.userData.label)}</span><button class="eye" title="Show / hide">👁</button>`;
+   li.onclick=e=>{if(e.target.classList.contains('eye')){e.stopPropagation();if(hidden.has(m))hidden.delete(m);else{hidden.add(m);if(selected===m)selected=null;}applyDisplay();markList();showInfo();return;}hidden.delete(m);select(selected===m?null:m);};
+   ul.appendChild(li);}}
+ filter();markList();}
+function markList(){for(const li of document.querySelectorAll('li.part')){li.classList.toggle('sel',li._m===selected);li.classList.toggle('off',!li._m.visible);}}
+function filter(){const q=$('q').value.trim().toLowerCase();const shown={};for(const li of document.querySelectorAll('li.part')){const ok=!q||li._m.userData.label.toLowerCase().includes(q)||((M.parts[li._m.userData.c.part].info||{}).material||'').toLowerCase().includes(q);li.hidden=!ok;if(ok)shown[li.dataset.group]=1;}for(const h of document.querySelectorAll('li.group'))h.hidden=!shown[h.dataset.group];}
+$('q').oninput=filter;
+$('showAll').onclick=()=>{hidden.clear();isolated=false;applyDisplay();markList();showInfo();};
+
+// Toolbar
+for(const b of document.querySelectorAll('[data-view]'))b.onclick=()=>fit(VIEWS[b.dataset.view]);
+$('fit').onclick=()=>fit(null);
+function setXray(v){xray=v;$('xray').setAttribute('aria-pressed',v);applyDisplay();}
+function setEdges(v){edges=v;$('edges').setAttribute('aria-pressed',v);applyDisplay();}
+$('xray').onclick=()=>setXray(!xray);
+$('edges').onclick=()=>setEdges(!edges);
+$('panelBtn').onclick=()=>{const on=document.body.classList.toggle('panel');$('panelBtn').setAttribute('aria-pressed',on);};
+$('shot').onclick=()=>{scene.background=new THREE.Color(css('--bg'));renderer.render(scene,camera);const a=document.createElement('a');a.download='luma-'+current.name+'.png';a.href=renderer.domElement.toDataURL('image/png');a.click();scene.background=null;request();};
+sel.onchange=()=>load(sel.value,true);
+window.addEventListener('hashchange',()=>{const n=decodeURIComponent(location.hash.slice(1));if(n&&n!==current.name&&M.configurations.some(c=>c.name===n))load(n,true);});
+window.addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea')||e.ctrlKey||e.metaKey||e.altKey)return;const k=e.key.toLowerCase();
+ if(k==='f')fit(null);else if(k==='x')setXray(!xray);else if(k==='e')setEdges(!edges);else if(k==='escape')select(null);else if(k==='h'&&selected){hidden.add(selected);select(null);}
+ else if('12345'.includes(k)&&k.length===1)fit(Object.values(VIEWS)[+k-1]);});
+matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{edgeMat.color.set(css('--edge'));placeGrid();request();});
+
+// Start
+const first=decodeURIComponent(location.hash.slice(1));
+resize();
+load(M.configurations.some(c=>c.name===first)?first:(M.configurations.find(c=>c.name==='Partition_DC')||M.configurations[0]).name,false);
+fit(VIEWS.iso,false);
+$('loading').style.display='none';
+(function loop(now){requestAnimationFrame(loop);step(now);if(controls.update())needs=true;if(needs){needs=false;renderer.render(scene,camera);}})(performance.now());
+})();
+</script>
+</body>
+</html>

@@ -12,7 +12,8 @@ using SolidWorks.Interop.swconst;
 class LumaBuilder {
  static SldWorks sw; static string root,run,parts; static StreamWriter log;
  static List<Item> items=new List<Item>(); static List<string> checks=new List<string>();
- static string templates=@"C:\ProgramData\SOLIDWORKS\SOLIDWORKS 2026\templates\";
+ // Templates come from SolidWorks' own default-template settings, so any install location or version works.
+ static string Template(swUserPreferenceStringValue_e kind){string t=sw.GetUserPreferenceStringValue((int)kind);if(string.IsNullOrEmpty(t)||!File.Exists(t))throw new Exception("Set a default template in SolidWorks: Tools > Options > Default Templates ("+kind+")");return t;}
  class Item { public string Name,Group,Shape,Material,Process,Path; public double W,H,D,T,X,Y,Z,Rho; public double[] Color; public Component2 Comp; public Item(string n,string g,string s,double w,double h,double d,double t,double x,double y,double z,string m,double rho,double[] color){Name=n;Group=g;Shape=s;W=w;H=h;D=d;T=t;X=x;Y=y;Z=z;Material=m;Rho=rho;Color=color;Process=m.Contains("steel")?"Laser cut / bend / machine":m.Contains("EPDM")?"Die cut":m.Contains("COTS")?"Purchased envelope - VERIFY":"Prototype print; production tooling review";} }
  static double[] white={.82,.88,.90},teal={.02,.42,.43},black={.08,.09,.11},metal={.58,.62,.65},blue={.06,.30,.65},orange={.95,.50,.08},green={.18,.58,.32};
  static void Say(string s){Console.WriteLine(s);log.WriteLine(s);log.Flush();}
@@ -121,7 +122,7 @@ class LumaBuilder {
    BuildAssembly(); WriteBOM(); File.WriteAllLines(Path.Combine(run,"checks.txt"),checks); File.WriteAllText(Path.Combine(root,"LATEST.txt"),run); Say("COMPLETE "+run);
   }catch(Exception e){Say("FAILED "+e);System.Environment.ExitCode=1;}finally{if(sw!=null)sw.CommandInProgress=false;log.Dispose();}
  }
- static ModelDoc2 NewPart(){var d=(ModelDoc2)sw.NewDocument(templates+"Part.PRTDOT",0,0,0);if(d==null)throw new Exception("Part template failed");d.SetUnits(0,0,2,0,false);return d;}
+ static ModelDoc2 NewPart(){var d=(ModelDoc2)sw.NewDocument(Template(swUserPreferenceStringValue_e.swDefaultTemplatePart),0,0,0);if(d==null)throw new Exception("Part template failed");d.SetUnits(0,0,2,0,false);return d;}
  static void Sketch(ModelDoc2 d){d.ClearSelection2(true);if(!d.Extension.SelectByID2("Front Plane","PLANE",0,0,0,false,0,null,0))throw new Exception("Front plane not found");d.SketchManager.InsertSketch(true);d.SketchManager.AddToDB=true;}
  static void Rect(ModelDoc2 d,double x,double y,double w,double h){d.SketchManager.CreateCornerRectangle(x/1000,y/1000,0,(x+w)/1000,(y+h)/1000,0);}
  static void Circle(ModelDoc2 d,double x,double y,double r){d.SketchManager.CreateCircleByRadius(x/1000,y/1000,0,r/1000);}
@@ -166,7 +167,7 @@ class LumaBuilder {
  static void Save(ModelDoc2 d,string path){int err=0,warn=0;bool ok=d.Extension.SaveAs(path,0,1,null,ref err,ref warn);if(!ok||err!=0)throw new Exception("Save failed "+path+" "+err);checks.Add("Saved "+Path.GetFileName(path)+" warnings="+warn);}
  static void Place(Component2 c,double x,double y,double z){var mu=(MathUtility)sw.GetMathUtility();bool rot=c.Name2.Contains("Rail_front_half")||c.Name2.Contains("Rail_rear_half")||c.Name2.Contains("Rail_insert");double[] data=rot?new double[]{1,0,0,0,0,1,0,-1,0,x/1000,y/1000,z/1000,1,0,0,0}:new double[]{1,0,0,0,1,0,0,0,1,x/1000,y/1000,z/1000,1,0,0,0};c.Transform2=(MathTransform)mu.CreateTransform(data);}
  static void BuildAssembly(){
-  Say("Assembly");var d=(ModelDoc2)sw.NewDocument(templates+"Assembly.ASMDOT",0,0,0);var a=(AssemblyDoc)d;d.SetUnits(0,0,2,0,false);int er=0,wa=0;
+  Say("Assembly");var d=(ModelDoc2)sw.NewDocument(Template(swUserPreferenceStringValue_e.swDefaultTemplateAssembly),0,0,0);var a=(AssemblyDoc)d;d.SetUnits(0,0,2,0,false);int er=0,wa=0;
   foreach(var it in items){sw.OpenDoc6(it.Path,1,1,"",ref er,ref wa);sw.ActivateDoc3(d.GetTitle(),false,0,ref er);var c=a.AddComponent5(it.Path,0,"",false,"",0,0,0);if(c==null)throw new Exception("Insert failed "+it.Name);it.Comp=c;Place(c,it.X,it.Y,it.Z);d.ClearSelection2(true);c.Select4(false,null,false);a.FixComponent();d.ClearSelection2(true);}
   foreach(string m in new[]{"Partition","Rail","Hook","Pedestal","Smooth","Magnetic"})foreach(string p in new[]{"DC","Battery"}){
    string cfg=m+"_"+p;d.ConfigurationManager.AddConfiguration2(cfg,"Prototype "+m+" / "+p,"",0,"","",false);d.ShowConfiguration2(cfg);
@@ -184,7 +185,7 @@ class LumaBuilder {
   int ix=0;foreach(var it in items){if(it.Group=="Core"){it.Comp.SetSuppression2(2);d.ClearSelection2(true);it.Comp.Select4(false,null,false);a.UnfixComponent();Place(it.Comp,it.X+(ix%4-1.5)*180,it.Y+(ix/4)*100,it.Z+(ix%4)*130);a.FixComponent();ix++;}else it.Comp.SetSuppression2(0);}
   d.ClearSelection2(true);d.EditRebuild3();d.ShowNamedView2("*Isometric",7);d.ViewZoomtofit2();d.SaveBMP(Path.Combine(run,"views","Exploded.bmp"),1600,1200);Save(d,Path.Combine(run,"Luma_Retrofit.SLDASM"));
   d.ShowConfiguration2("Partition_DC");foreach(var it in items){if(it.Comp.GetSuppression()!=0){d.ClearSelection2(true);it.Comp.Select4(false,null,false);a.UnfixComponent();Place(it.Comp,it.X,it.Y,it.Z);a.FixComponent();}}d.ClearSelection2(true);d.EditRebuild3();d.ShowNamedView2("*Isometric",7);d.ViewZoomtofit2();Save(d,Path.Combine(run,"Luma_Retrofit.SLDASM"));
-  try{var dr=(ModelDoc2)sw.NewDocument(templates+"Drawing.DRWDOT",0,0,0);if(dr!=null){var draw=(DrawingDoc)dr;draw.Create3rdAngleViews2(Path.Combine(run,"Luma_Retrofit.SLDASM"));dr.ViewZoomtofit2();Save(dr,Path.Combine(run,"Luma_GA.SLDDRW"));sw.CloseDoc(dr.GetTitle());}}catch(Exception e){checks.Add("Drawing: "+e.Message);}
+  try{var dr=(ModelDoc2)sw.NewDocument(Template(swUserPreferenceStringValue_e.swDefaultTemplateDrawing),0,0,0);if(dr!=null){var draw=(DrawingDoc)dr;draw.Create3rdAngleViews2(Path.Combine(run,"Luma_Retrofit.SLDASM"));dr.ViewZoomtofit2();Save(dr,Path.Combine(run,"Luma_GA.SLDDRW"));sw.CloseDoc(dr.GetTitle());}}catch(Exception e){checks.Add("Drawing: "+e.Message);}
   Say("Assembly complete");
  }
  static void WriteBOM(){var rows=new List<string>{"Part,Configuration_group,Shape,Width_mm,Height_mm,Depth_mm,Wall_mm,X_mm,Y_mm,Z_mm,Material,Process,Qty"};foreach(var i in items)rows.Add(string.Join(",",new[]{i.Name,i.Group,i.Shape,Num(i.W),Num(i.H),Num(i.D),Num(i.T),Num(i.X),Num(i.Y),Num(i.Z),i.Material,i.Process,"1"}));File.WriteAllLines(Path.Combine(run,"BOM.csv"),rows);}

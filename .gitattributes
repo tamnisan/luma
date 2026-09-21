@@ -1,0 +1,16 @@
+# CAD and mesh files are binary: never convert line endings or diff them
+*.SLDPRT binary
+*.SLDASM binary
+*.SLDDRW binary
+*.sldprt binary
+*.sldasm binary
+*.slddrw binary
+*.stl binary
+*.png binary
+*.bmp binary
+# STEP is text, but keep the exporter's bytes exactly as written
+*.step -text -diff
+
+# Keep GitHub's language statistics about this project, not bundled libraries or generated data
+src/vendor/** linguist-vendored
+builds/*/viewer/** linguist-generated -diff

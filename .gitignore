@@ -1,0 +1,14 @@
+# Compiled by src/Build.ps1 on each run
+src/*.exe
+src/SolidWorks.Interop.*.dll
+
+# SolidWorks lock and backup files
+~$*
+*.SLDBAK
+Backup of *
+
+# Raw SolidWorks screen captures; the PNG copies are committed
+builds/*/views/*.bmp
+
+# Output of src/Package.ps1; attach the zip to a GitHub Release instead of committing it
+deliverables/

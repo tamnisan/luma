@@ -9,7 +9,7 @@ class FinalizeCAD{
   }
   d.ClearSelection2(true);d.DeleteConfiguration2("Exploded_Core");d.EditRebuild3();d.Save3(1,ref er,ref wa);Console.WriteLine("Restored base positions");
   // Independent assembly preserves the operational configurations' placements.
-  var exp=(ModelDoc2)sw.NewDocument(@"C:\ProgramData\SOLIDWORKS\SOLIDWORKS 2026\templates\Assembly.ASMDOT",0,0,0);var ea=(AssemblyDoc)exp;var core=rows.Values.Where(r=>r[1]=="Core").ToArray();var files=core.Select(r=>Path.Combine(run,"parts",r[0]+".SLDPRT")).ToArray();var transforms=new List<double>();
+  var exp=(ModelDoc2)sw.NewDocument(sw.GetUserPreferenceStringValue(9/*swDefaultTemplateAssembly*/),0,0,0);var ea=(AssemblyDoc)exp;var core=rows.Values.Where(r=>r[1]=="Core").ToArray();var files=core.Select(r=>Path.Combine(run,"parts",r[0]+".SLDPRT")).ToArray();var transforms=new List<double>();
   for(int i=0;i<core.Length;i++){var r=core[i];double x=(double.Parse(r[7])+(i%5-2)*250)/1000,y=(double.Parse(r[8])+(i/5)*160)/1000,z=(double.Parse(r[9])+(i%5)*130)/1000;transforms.AddRange(new[]{1.0,0,0,0,1,0,0,0,1,x,y,z,1,0,0,0});}
   var inserted=(object[])ea.AddComponents3(files,transforms.ToArray(),Enumerable.Repeat("",files.Length).ToArray());if(inserted==null||inserted.Length!=files.Length)throw new Exception("Exploded batch insert failed");
   exp.EditRebuild3();exp.ShowNamedView2("*Isometric",7);exp.ViewZoomtofit2();exp.Extension.SaveAs(Path.Combine(run,"Luma_Exploded.SLDASM"),0,1,null,ref er,ref wa);exp.SaveBMP(Path.Combine(run,"views","Exploded.bmp"),1600,1200);sw.CloseDoc(exp.GetTitle());sw.ActivateDoc3(d.GetTitle(),false,0,ref er);
