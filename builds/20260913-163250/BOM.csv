@@ -1,0 +1,106 @@
+Part,Configuration_group,Shape,Width_mm,Height_mm,Depth_mm,Wall_mm,X_mm,Y_mm,Z_mm,Material,Process,Qty
+01_Main_shell,Core,tray,230,330,128,3,-115,0,0,PC-ABS,Prototype print; production tooling review,1
+02_Service_door_frame,Core,ring,224,324,5,14,-112,3,129,PC-ABS,Prototype print; production tooling review,1
+03_Upper_front_panel,Core,box,194,106,3,0,-97,207,130,PC-ABS,Prototype print; production tooling review,1
+04_Lower_front_panel,Core,box,194,67,3,0,-97,17,130,PC-ABS,Prototype print; production tooling review,1
+05_Optics_front_cover,Core,box,194,93,3,0,-97,114,130,PC-ABS,Prototype print; production tooling review,1
+06_Input_shutter,Core,box,154,25,3,0,-70,86,131,PC-ABS,Prototype print; production tooling review,1
+07_Door_EPDM_gasket,Core,ring,224,324,1,3,-112,3,128,EPDM,Die cut,1
+08_Universal_mount_plate,Core,plate,180,260,4,0,-90,35,-8,304 stainless steel,Laser cut / bend / machine,1
+09_Rear_standoff_L,Core,box,12,245,4,0,-84,43,-4,304 stainless steel,Laser cut / bend / machine,1
+10_Rear_standoff_R,Core,box,12,245,4,0,72,43,-4,304 stainless steel,Laser cut / bend / machine,1
+11_Dry_electronics_tray,Core,tray,196,96,66,3,-98,224,12,PC-ABS,Prototype print; production tooling review,1
+12_Dry_electronics_lid,Core,box,190,90,2,0,-95,227,78,PC-ABS,Prototype print; production tooling review,1
+13_Controller_UNO_envelope,Core,box,69,54,16,0,-89,250,20,COTS PCB envelope,Purchased envelope - VERIFY,1
+14_Dual_power_fuse_module,Core,box,37,27,16,0,-10,278,20,COTS electrical envelope,Purchased envelope - VERIFY,1
+15_Display_bezel,Core,ring,101,57,1,7,-47,246,133,PC-ABS,Prototype print; production tooling review,1
+16_Display_protective_window,Core,box,86,42,1,0,-39.5,253.5,133,Polycarbonate,Prototype print; production tooling review,1
+17_QR_label_area,Core,box,27,27,0.4,0,63,268,133,Label,Prototype print; production tooling review,1
+18_Status_LED,Core,disk,5,5,1,0,-81,268,133,COTS LED,Purchased envelope - VERIFY,1
+19_Buzzer_envelope,Core,disk,14,14,7,0,65,292,30,COTS buzzer,Purchased envelope - VERIFY,1
+20_Sealed_strip_cassette,Core,tray,34,130,45,2,-106,91,22,Polypropylene,Prototype print; production tooling review,1
+21_Cassette_sealed_lid,Core,box,30,126,2,0,-104,93,67,Polypropylene,Prototype print; production tooling review,1
+22_Optical_chamber,Core,tray,158,59,66,2,-64,145,22,Black PC-ABS,Prototype print; production tooling review,1
+23_Optical_removable_lid,Core,box,154,55,2,0,-62,147,88,Black PC-ABS,Prototype print; production tooling review,1
+24_Optical_insert_baffle,Core,ring,148,49,7,3,-59,150,79,Black PC-ABS,Prototype print; production tooling review,1
+25_Strip_datum_carrier,Core,tray,137,13,8,1,-55,156,50,Polypropylene,Prototype print; production tooling review,1
+26_Reagent_strip_envelope,Core,box,125,5,0.5,0,-49,160,52,COTS strip envelope,Purchased envelope - VERIFY,1
+27_Scan_rail,Core,box,142,6,6,0,-57,191,43,304 stainless steel,Laser cut / bend / machine,1
+28_Optical_scan_carriage,Core,ring,28,28,3,5,-52,159,64,Black PC-ABS,Prototype print; production tooling review,1
+29_RGB_sensor_envelope,Core,box,21,21,5,0,-48.5,162.5,67,COTS PCB envelope,Purchased envelope - VERIFY,1
+30_Left_LED_bracket,Core,ring,10,16,3,2,-62,164,61,Black PC-ABS,Prototype print; production tooling review,1
+31_Right_LED_bracket,Core,ring,10,16,3,2,-24,164,61,Black PC-ABS,Prototype print; production tooling review,1
+32_Left_LED_envelope,Core,box,6,8,2,0,-60,168,64,COTS LED,Purchased envelope - VERIFY,1
+33_Right_LED_envelope,Core,box,6,8,2,0,-22,168,64,COTS LED,Purchased envelope - VERIFY,1
+34_Calibration_tile,Core,box,8,8,1,0,78,158,54,Ceramic reference placeholder,Prototype print; production tooling review,1
+35_Scan_motor_envelope,Core,box,20,20,20,0,69,175,26,COTS motor,Purchased envelope - VERIFY,1
+36_Lead_screw_envelope,Core,box,132,3,3,0,-54,188,52,304 stainless steel,Laser cut / bend / machine,1
+37_Sample_drawer_module,Core,tray,154,24,51,2,-70,89,78,Polypropylene,Prototype print; production tooling review,1
+38_Wet_dry_barrier,Core,box,198,3,112,0,-99,219,8,PC-ABS,Prototype print; production tooling review,1
+39_Drip_tray,Core,tray,148,12,72,2,-68,75,48,Polypropylene,Prototype print; production tooling review,1
+40_Used_strip_waste_cartridge,Core,tray,142,56,93,2,-66,16,17,Polypropylene,Prototype print; production tooling review,1
+41_Waste_transport_lid,Core,ring,138,52,2,6,-64,18,110,Polypropylene,Prototype print; production tooling review,1
+42_Waste_closure_slide,Core,box,125,38,1,0,-57,25,112,Polypropylene,Prototype print; production tooling review,1
+43_Cleaning_fluid_cartridge,Core,tray,24,60,48,2,81,20,25,Polypropylene,Prototype print; production tooling review,1
+44_Battery_tray,Battery,tray,81,29,47,2,-91,228,82,PC-ABS,Prototype print; production tooling review,1
+45_Battery_protected_pack_envelope,Battery,box,75,23,39,0,-88,231,84,COTS battery envelope,Purchased envelope - VERIFY,1
+46_DC_connector_bracket,DC,ring,20,16,3,4,66,230,93,PC-ABS,Prototype print; production tooling review,1
+47_DC_connector_envelope,DC,disk,8,8,13,0,72,234,96,COTS connector,Purchased envelope - VERIFY,1
+48_Cable_gland,Core,tube,12,12,9,3,81,231,107,COTS gland,Purchased envelope - VERIFY,1
+49_Strain_relief,Core,ring,18,12,5,3,58,305,25,EPDM,Die cut,1
+50_Cable_channel,Core,ring,8,188,7,2,99,114,103,PC-ABS,Prototype print; production tooling review,1
+51_Door_interlock,Core,box,10,14,7,0,99,284,118,COTS switch,Purchased envelope - VERIFY,1
+52_Cartridge_present_switch,Core,box,8,10,6,0,-76,53,97,COTS switch,Purchased envelope - VERIFY,1
+53_Drip_overflow_sensor,Core,box,12,6,2,0,63,77,90,COTS PCB envelope,Purchased envelope - VERIFY,1
+54_Strip_jam_home_sensor,Core,box,8,8,5,0,79,146,58,COTS sensor,Purchased envelope - VERIFY,1
+55_Hinge_lower,Core,tube,8,8,16,2,-110,42,111,304 stainless steel,Laser cut / bend / machine,1
+56_Hinge_upper,Core,tube,8,8,16,2,-110,282,111,304 stainless steel,Laser cut / bend / machine,1
+57_Service_lock,Core,disk,12,12,13,0,98,158,114,COTS lock,Purchased envelope - VERIFY,1
+58_Tether_eye,Core,tube,16,16,4,4,69,280,-12,304 stainless steel,Laser cut / bend / machine,1
+59_M4_captive_fastener_0,Core,disk,4,4,7,0,-80,47,-7,304 stainless steel,Laser cut / bend / machine,1
+59_M4_captive_fastener_1,Core,disk,4,4,7,0,76,47,-7,304 stainless steel,Laser cut / bend / machine,1
+59_M4_captive_fastener_2,Core,disk,4,4,7,0,-80,279,-7,304 stainless steel,Laser cut / bend / machine,1
+59_M4_captive_fastener_3,Core,disk,4,4,7,0,76,279,-7,304 stainless steel,Laser cut / bend / machine,1
+Partition_adapter,Mount_Partition,plate,180,260,4,0,-90,35,-16,304 stainless steel,Laser cut / bend / machine,1
+Rail_adapter,Mount_Rail,plate,180,260,4,0,-90,35,-16,304 stainless steel,Laser cut / bend / machine,1
+Hook_adapter,Mount_Hook,plate,180,260,4,0,-90,35,-16,304 stainless steel,Laser cut / bend / machine,1
+Pedestal_adapter,Mount_Pedestal,plate,180,260,4,0,-90,35,-16,304 stainless steel,Laser cut / bend / machine,1
+Smooth_adapter,Mount_Smooth,plate,180,260,4,0,-90,35,-16,304 stainless steel,Laser cut / bend / machine,1
+Magnetic_adapter,Mount_Magnetic,plate,180,260,4,0,-90,35,-16,304 stainless steel,Laser cut / bend / machine,1
+Partition_fixed_jaw_0,Mount_Partition,box,40,35,4,0,-20,60,-20,304 stainless steel,Laser cut / bend / machine,1
+Partition_bridge_0,Mount_Partition,box,4,35,66,0,-24,60,-82,304 stainless steel,Laser cut / bend / machine,1
+Partition_moving_jaw_0,Mount_Partition,box,40,35,4,0,-20,60,-76,304 stainless steel,Laser cut / bend / machine,1
+Partition_pad_front_0,Mount_Partition,box,36,31,2,0,-18,62,-22,EPDM,Die cut,1
+Partition_pad_rear_0,Mount_Partition,box,36,31,2,0,-18,62,-72,EPDM,Die cut,1
+Partition_M8_screw_0,Mount_Partition,disk,8,8,16,0,-4,73,-90,304 stainless steel,Laser cut / bend / machine,1
+Rail_front_half_0,Mount_Rail,half_front,54,54,20,4,-27,80,-74,304 stainless steel,Laser cut / bend / machine,1
+Rail_rear_half_0,Mount_Rail,half_rear,54,54,20,4,-27,80,-74,304 stainless steel,Laser cut / bend / machine,1
+Rail_insert_front_32mm_0,Mount_Rail,half_front,46,46,20,7,-23,80,-70,EPDM,Die cut,1
+Rail_insert_rear_32mm_0,Mount_Rail,half_rear,46,46,20,7,-23,80,-70,EPDM,Die cut,1
+Rail_bridge_0,Mount_Rail,box,12,20,5,0,-6,60,-21,304 stainless steel,Laser cut / bend / machine,1
+Partition_fixed_jaw_1,Mount_Partition,box,40,35,4,0,-20,250,-20,304 stainless steel,Laser cut / bend / machine,1
+Partition_bridge_1,Mount_Partition,box,4,35,66,0,-24,250,-82,304 stainless steel,Laser cut / bend / machine,1
+Partition_moving_jaw_1,Mount_Partition,box,40,35,4,0,-20,250,-76,304 stainless steel,Laser cut / bend / machine,1
+Partition_pad_front_1,Mount_Partition,box,36,31,2,0,-18,252,-22,EPDM,Die cut,1
+Partition_pad_rear_1,Mount_Partition,box,36,31,2,0,-18,252,-72,EPDM,Die cut,1
+Partition_M8_screw_1,Mount_Partition,disk,8,8,16,0,-4,263,-90,304 stainless steel,Laser cut / bend / machine,1
+Rail_front_half_1,Mount_Rail,half_front,54,54,20,4,-27,270,-74,304 stainless steel,Laser cut / bend / machine,1
+Rail_rear_half_1,Mount_Rail,half_rear,54,54,20,4,-27,270,-74,304 stainless steel,Laser cut / bend / machine,1
+Rail_insert_front_32mm_1,Mount_Rail,half_front,46,46,20,7,-23,270,-70,EPDM,Die cut,1
+Rail_insert_rear_32mm_1,Mount_Rail,half_rear,46,46,20,7,-23,270,-70,EPDM,Die cut,1
+Rail_bridge_1,Mount_Rail,box,12,20,5,0,-6,250,-21,304 stainless steel,Laser cut / bend / machine,1
+Hook_top_bridge,Mount_Hook,box,70,4,68,0,-35,335,-80,304 stainless steel,Laser cut / bend / machine,1
+Hook_front_drop,Mount_Hook,box,70,75,4,0,-35,260,-16,304 stainless steel,Laser cut / bend / machine,1
+Hook_rear_drop,Mount_Hook,box,70,60,4,0,-35,275,-80,304 stainless steel,Laser cut / bend / machine,1
+Hook_protective_pad,Mount_Hook,box,66,2,55,0,-33,333,-73,EPDM,Die cut,1
+Pedestal_ballast_base,Mount_Pedestal,box,500,30,500,0,-250,-1030,-245,304 stainless steel,Laser cut / bend / machine,1
+Pedestal_tower,Mount_Pedestal,box,60,1200,6,0,-30,-1000,-66,304 stainless steel,Laser cut / bend / machine,1
+Pedestal_head,Mount_Pedestal,box,100,90,44,0,-50,95,-60,PC-ABS,Prototype print; production tooling review,1
+Smooth_pad_0,Mount_Smooth,box,50,55,2,0,-70,55,-18,COTS removable pad UNRATED,Purchased envelope - VERIFY,1
+Magnet_pot_0,Mount_Magnetic,disk,32,32,7,0,-65,60,-23,COTS magnet UNRATED,Purchased envelope - VERIFY,1
+Smooth_pad_1,Mount_Smooth,box,50,55,2,0,20,55,-18,COTS removable pad UNRATED,Purchased envelope - VERIFY,1
+Magnet_pot_1,Mount_Magnetic,disk,32,32,7,0,33,60,-23,COTS magnet UNRATED,Purchased envelope - VERIFY,1
+Smooth_pad_2,Mount_Smooth,box,50,55,2,0,-70,215,-18,COTS removable pad UNRATED,Purchased envelope - VERIFY,1
+Magnet_pot_2,Mount_Magnetic,disk,32,32,7,0,-65,218,-23,COTS magnet UNRATED,Purchased envelope - VERIFY,1
+Smooth_pad_3,Mount_Smooth,box,50,55,2,0,20,215,-18,COTS removable pad UNRATED,Purchased envelope - VERIFY,1
+Magnet_pot_3,Mount_Magnetic,disk,32,32,7,0,33,218,-23,COTS magnet UNRATED,Purchased envelope - VERIFY,1

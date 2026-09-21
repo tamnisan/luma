@@ -1,0 +1,12 @@
+Partition_DC active=73
+Partition_Battery active=73
+Rail_DC active=71
+Rail_Battery active=71
+Hook_DC active=65
+Hook_Battery active=65
+Pedestal_DC active=64
+Pedestal_Battery active=64
+Smooth_DC active=65
+Smooth_Battery active=65
+Magnetic_DC active=65
+Magnetic_Battery active=65

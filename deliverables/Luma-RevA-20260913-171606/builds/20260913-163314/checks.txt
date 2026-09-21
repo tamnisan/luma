@@ -1,0 +1,237 @@
+Part72 Profile sketch status=2 fullyDefine=0
+Part72 Back sketch status=2 fullyDefine=0
+Saved 25_Strip_datum_carrier.SLDPRT warnings=0
+Part73 Profile sketch status=2 fullyDefine=0
+Saved 26_Reagent_strip_envelope.SLDPRT warnings=0
+Part74 Profile sketch status=2 fullyDefine=0
+Saved 27_Scan_rail.SLDPRT warnings=0
+Part75 Profile sketch status=2 fullyDefine=0
+Saved 28_Optical_scan_carriage.SLDPRT warnings=0
+Part76 Profile sketch status=2 fullyDefine=0
+Saved 29_RGB_sensor_envelope.SLDPRT warnings=0
+Part77 Profile sketch status=2 fullyDefine=0
+Saved 30_Left_LED_bracket.SLDPRT warnings=0
+Part78 Profile sketch status=2 fullyDefine=0
+Saved 31_Right_LED_bracket.SLDPRT warnings=0
+Part79 Profile sketch status=2 fullyDefine=0
+Saved 32_Left_LED_envelope.SLDPRT warnings=0
+Part80 Profile sketch status=2 fullyDefine=0
+Saved 33_Right_LED_envelope.SLDPRT warnings=0
+Part81 Profile sketch status=2 fullyDefine=0
+Saved 34_Calibration_tile.SLDPRT warnings=0
+Part82 Profile sketch status=2 fullyDefine=0
+Saved 35_Scan_motor_envelope.SLDPRT warnings=0
+Part83 Profile sketch status=2 fullyDefine=0
+Saved 36_Lead_screw_envelope.SLDPRT warnings=0
+Part84 Profile sketch status=2 fullyDefine=0
+Part84 Back sketch status=2 fullyDefine=0
+Saved 37_Sample_drawer_module.SLDPRT warnings=0
+Part85 Profile sketch status=2 fullyDefine=0
+Saved 38_Wet_dry_barrier.SLDPRT warnings=0
+Part86 Profile sketch status=2 fullyDefine=0
+Part86 Back sketch status=2 fullyDefine=0
+Saved 39_Drip_tray.SLDPRT warnings=0
+Part87 Profile sketch status=2 fullyDefine=0
+Part87 Back sketch status=2 fullyDefine=0
+Saved 40_Used_strip_waste_cartridge.SLDPRT warnings=0
+Part88 Profile sketch status=2 fullyDefine=0
+Saved 41_Waste_transport_lid.SLDPRT warnings=0
+Part89 Profile sketch status=2 fullyDefine=0
+Saved 42_Waste_closure_slide.SLDPRT warnings=0
+Part90 Profile sketch status=2 fullyDefine=0
+Part90 Back sketch status=2 fullyDefine=0
+Saved 43_Cleaning_fluid_cartridge.SLDPRT warnings=0
+Part91 Profile sketch status=2 fullyDefine=0
+Part91 Back sketch status=2 fullyDefine=0
+Saved 44_Battery_tray.SLDPRT warnings=0
+Part92 Profile sketch status=2 fullyDefine=0
+Saved 45_Battery_protected_pack_envelope.SLDPRT warnings=0
+Part93 Profile sketch status=2 fullyDefine=0
+Saved 46_DC_connector_bracket.SLDPRT warnings=0
+Part94 Profile sketch status=2 fullyDefine=0
+Saved 47_DC_connector_envelope.SLDPRT warnings=0
+Part95 Profile sketch status=2 fullyDefine=0
+Saved 48_Cable_gland.SLDPRT warnings=0
+Part96 Profile sketch status=2 fullyDefine=0
+Saved 49_Strain_relief.SLDPRT warnings=0
+Part97 Profile sketch status=2 fullyDefine=0
+Saved 50_Cable_channel.SLDPRT warnings=0
+Part98 Profile sketch status=2 fullyDefine=0
+Saved 51_Door_interlock.SLDPRT warnings=0
+Part99 Profile sketch status=2 fullyDefine=0
+Saved 52_Cartridge_present_switch.SLDPRT warnings=0
+Part100 Profile sketch status=2 fullyDefine=0
+Saved 53_Drip_overflow_sensor.SLDPRT warnings=0
+Part101 Profile sketch status=2 fullyDefine=0
+Saved 54_Strip_jam_home_sensor.SLDPRT warnings=0
+Part102 Profile sketch status=2 fullyDefine=0
+Saved 55_Hinge_lower.SLDPRT warnings=0
+Part103 Profile sketch status=2 fullyDefine=0
+Saved 56_Hinge_upper.SLDPRT warnings=0
+Part104 Profile sketch status=2 fullyDefine=0
+Saved 57_Service_lock.SLDPRT warnings=0
+Part105 Profile sketch status=2 fullyDefine=0
+Saved 58_Tether_eye.SLDPRT warnings=0
+Part106 Profile sketch status=2 fullyDefine=0
+Saved 59_M4_captive_fastener_0.SLDPRT warnings=0
+Part107 Profile sketch status=2 fullyDefine=0
+Saved 59_M4_captive_fastener_1.SLDPRT warnings=0
+Part108 Profile sketch status=2 fullyDefine=0
+Saved 59_M4_captive_fastener_2.SLDPRT warnings=0
+Part109 Profile sketch status=2 fullyDefine=0
+Saved 59_M4_captive_fastener_3.SLDPRT warnings=0
+Part110 Profile sketch status=2 fullyDefine=0
+Saved Partition_adapter.SLDPRT warnings=0
+Part111 Profile sketch status=2 fullyDefine=0
+Saved Rail_adapter.SLDPRT warnings=0
+Part112 Profile sketch status=2 fullyDefine=0
+Saved Hook_adapter.SLDPRT warnings=0
+Part113 Profile sketch status=2 fullyDefine=0
+Saved Pedestal_adapter.SLDPRT warnings=0
+Part114 Profile sketch status=2 fullyDefine=0
+Saved Smooth_adapter.SLDPRT warnings=0
+Part115 Profile sketch status=2 fullyDefine=0
+Saved Magnetic_adapter.SLDPRT warnings=0
+Part116 Profile sketch status=2 fullyDefine=0
+Saved Partition_fixed_jaw_0.SLDPRT warnings=0
+Part117 Profile sketch status=2 fullyDefine=0
+Saved Partition_bridge_0.SLDPRT warnings=0
+Part118 Profile sketch status=2 fullyDefine=0
+Saved Partition_moving_jaw_0.SLDPRT warnings=0
+Part119 Profile sketch status=2 fullyDefine=0
+Saved Partition_pad_front_0.SLDPRT warnings=0
+Part120 Profile sketch status=2 fullyDefine=0
+Saved Partition_pad_rear_0.SLDPRT warnings=0
+Part121 Profile sketch status=2 fullyDefine=0
+Saved Partition_M8_screw_0.SLDPRT warnings=0
+Part122 Profile sketch status=2 fullyDefine=0
+Saved Rail_front_half_0.SLDPRT warnings=0
+Part123 Profile sketch status=2 fullyDefine=0
+Saved Rail_rear_half_0.SLDPRT warnings=0
+Part124 Profile sketch status=2 fullyDefine=0
+Saved Rail_insert_front_32mm_0.SLDPRT warnings=0
+Part125 Profile sketch status=2 fullyDefine=0
+Saved Rail_insert_rear_32mm_0.SLDPRT warnings=0
+Part126 Profile sketch status=2 fullyDefine=0
+Saved Rail_bridge_0.SLDPRT warnings=0
+Part127 Profile sketch status=2 fullyDefine=0
+Saved Partition_fixed_jaw_1.SLDPRT warnings=0
+Part128 Profile sketch status=2 fullyDefine=0
+Saved Partition_bridge_1.SLDPRT warnings=0
+Part129 Profile sketch status=2 fullyDefine=0
+Saved Partition_moving_jaw_1.SLDPRT warnings=0
+Part130 Profile sketch status=2 fullyDefine=0
+Saved Partition_pad_front_1.SLDPRT warnings=0
+Part131 Profile sketch status=2 fullyDefine=0
+Saved Partition_pad_rear_1.SLDPRT warnings=0
+Part132 Profile sketch status=2 fullyDefine=0
+Saved Partition_M8_screw_1.SLDPRT warnings=0
+Part133 Profile sketch status=2 fullyDefine=0
+Saved Rail_front_half_1.SLDPRT warnings=0
+Part134 Profile sketch status=2 fullyDefine=0
+Saved Rail_rear_half_1.SLDPRT warnings=0
+Part135 Profile sketch status=2 fullyDefine=0
+Saved Rail_insert_front_32mm_1.SLDPRT warnings=0
+Part136 Profile sketch status=2 fullyDefine=0
+Saved Rail_insert_rear_32mm_1.SLDPRT warnings=0
+Part137 Profile sketch status=2 fullyDefine=0
+Saved Rail_bridge_1.SLDPRT warnings=0
+Part138 Profile sketch status=2 fullyDefine=0
+Saved Hook_top_bridge.SLDPRT warnings=0
+Part139 Profile sketch status=2 fullyDefine=0
+Saved Hook_front_drop.SLDPRT warnings=0
+Part140 Profile sketch status=2 fullyDefine=0
+Saved Hook_rear_drop.SLDPRT warnings=0
+Part141 Profile sketch status=2 fullyDefine=0
+Saved Hook_protective_pad.SLDPRT warnings=0
+Part142 Profile sketch status=2 fullyDefine=0
+Saved Pedestal_ballast_base.SLDPRT warnings=0
+Part143 Profile sketch status=2 fullyDefine=0
+Saved Pedestal_tower.SLDPRT warnings=0
+Part144 Profile sketch status=2 fullyDefine=0
+Saved Pedestal_head.SLDPRT warnings=0
+Part145 Profile sketch status=2 fullyDefine=0
+Saved Smooth_pad_0.SLDPRT warnings=0
+Part146 Profile sketch status=2 fullyDefine=0
+Saved Magnet_pot_0.SLDPRT warnings=0
+Part147 Profile sketch status=2 fullyDefine=0
+Saved Smooth_pad_1.SLDPRT warnings=0
+Part148 Profile sketch status=2 fullyDefine=0
+Saved Magnet_pot_1.SLDPRT warnings=0
+Part149 Profile sketch status=2 fullyDefine=0
+Saved Smooth_pad_2.SLDPRT warnings=0
+Part150 Profile sketch status=2 fullyDefine=0
+Saved Magnet_pot_2.SLDPRT warnings=0
+Part151 Profile sketch status=2 fullyDefine=0
+Saved Smooth_pad_3.SLDPRT warnings=0
+Part152 Profile sketch status=2 fullyDefine=0
+Saved Magnet_pot_3.SLDPRT warnings=0
+Saved Luma_Retrofit.SLDASM warnings=0
+SolidWorks interference count=64
+INTERFERENCE Partition_adapter-1 / Hook_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Hook_adapter-1 / Pedestal_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Partition_adapter-1 / Smooth_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Rail_adapter-1 / Pedestal_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Rail_adapter-1 / Magnetic_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Partition_adapter-1 / Rail_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Partition_adapter-1 / Pedestal_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Rail_adapter-1 / Smooth_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Pedestal_adapter-1 / Smooth_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Hook_adapter-1 / Smooth_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Pedestal_adapter-1 / Magnetic_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Hook_adapter-1 / Magnetic_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Smooth_adapter-1 / Magnetic_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Partition_adapter-1 / Magnetic_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Rail_adapter-1 / Hook_adapter-1 volume(m3)=0.000186885840734641
+INTERFERENCE Smooth_adapter-1 / Hook_front_drop-1 volume(m3)=9.80000000000001E-06
+INTERFERENCE Hook_adapter-1 / Hook_front_drop-1 volume(m3)=9.80000000000001E-06
+INTERFERENCE Pedestal_adapter-1 / Hook_front_drop-1 volume(m3)=9.80000000000001E-06
+INTERFERENCE Partition_adapter-1 / Hook_front_drop-1 volume(m3)=9.80000000000001E-06
+INTERFERENCE Rail_adapter-1 / Hook_front_drop-1 volume(m3)=9.80000000000001E-06
+INTERFERENCE Magnetic_adapter-1 / Hook_front_drop-1 volume(m3)=9.80000000000001E-06
+INTERFERENCE Rail_insert_rear_32mm_0-1 / Pedestal_tower-1 volume(m3)=3.16054716575651E-06
+INTERFERENCE 20_Sealed_strip_cassette-1 / 38_Wet_dry_barrier-1 volume(m3)=2.43E-06
+INTERFERENCE Smooth_pad_2-1 / Magnet_pot_2-1 volume(m3)=1.60849543863797E-06
+INTERFERENCE Smooth_pad_3-1 / Magnet_pot_3-1 volume(m3)=1.60849543863797E-06
+INTERFERENCE Smooth_pad_0-1 / Magnet_pot_0-1 volume(m3)=1.60849543863797E-06
+INTERFERENCE Smooth_pad_1-1 / Magnet_pot_1-1 volume(m3)=1.60849543863797E-06
+INTERFERENCE Partition_fixed_jaw_1-1 / Rail_bridge_1-1 volume(m3)=9.60000000000001E-07
+INTERFERENCE Partition_fixed_jaw_0-1 / Rail_bridge_0-1 volume(m3)=9.6E-07
+INTERFERENCE Pedestal_head-1 / Smooth_pad_1-1 volume(m3)=8.99999999999999E-07
+INTERFERENCE Pedestal_head-1 / Smooth_pad_0-1 volume(m3)=8.99999999999999E-07
+INTERFERENCE Partition_pad_rear_1-1 / Rail_rear_half_1-1 volume(m3)=8.85874599779654E-07
+INTERFERENCE Partition_pad_rear_0-1 / Rail_rear_half_0-1 volume(m3)=8.85874599779653E-07
+INTERFERENCE Partition_bridge_0-1 / Pedestal_tower-1 volume(m3)=8.39999999999999E-07
+INTERFERENCE Partition_bridge_1-1 / Rail_front_half_1-1 volume(m3)=7.81181838936453E-07
+INTERFERENCE Partition_bridge_0-1 / Rail_front_half_0-1 volume(m3)=7.81181838936452E-07
+INTERFERENCE Partition_bridge_1-1 / Rail_rear_half_1-1 volume(m3)=7.81181838936451E-07
+INTERFERENCE Partition_bridge_0-1 / Rail_rear_half_0-1 volume(m3)=7.81181838936451E-07
+INTERFERENCE Rail_rear_half_0-1 / Pedestal_tower-1 volume(m3)=6.35955414592938E-07
+INTERFERENCE Rail_rear_half_0-1 / Pedestal_tower-1 volume(m3)=6.35955414592937E-07
+INTERFERENCE Partition_moving_jaw_1-1 / Rail_rear_half_1-1 volume(m3)=5.4805652736378E-07
+INTERFERENCE Partition_moving_jaw_0-1 / Rail_rear_half_0-1 volume(m3)=5.48056527363779E-07
+INTERFERENCE Partition_pad_front_1-1 / Rail_front_half_1-1 volume(m3)=4.93250874627402E-07
+INTERFERENCE Partition_pad_front_0-1 / Rail_front_half_0-1 volume(m3)=4.93250874627401E-07
+INTERFERENCE Partition_bridge_1-1 / Rail_insert_rear_32mm_1-1 volume(m3)=4.60590156759863E-07
+INTERFERENCE Partition_bridge_1-1 / Rail_insert_front_32mm_1-1 volume(m3)=4.60590156759863E-07
+INTERFERENCE Partition_bridge_0-1 / Rail_insert_rear_32mm_0-1 volume(m3)=4.60590156759863E-07
+INTERFERENCE Partition_bridge_0-1 / Rail_insert_front_32mm_0-1 volume(m3)=4.60590156759862E-07
+INTERFERENCE Partition_bridge_0-1 / Smooth_pad_0-1 volume(m3)=2.8E-07
+INTERFERENCE Partition_pad_front_1-1 / Rail_bridge_1-1 volume(m3)=2.16000000000001E-07
+INTERFERENCE Partition_pad_front_0-1 / Rail_bridge_0-1 volume(m3)=2.16000000000001E-07
+INTERFERENCE 27_Scan_rail-1 / 35_Scan_motor_envelope-1 volume(m3)=1.91999999999999E-07
+INTERFERENCE Rail_front_half_1-1 / Rail_bridge_1-1 volume(m3)=1.86264465215151E-07
+INTERFERENCE Rail_front_half_0-1 / Rail_bridge_0-1 volume(m3)=1.86264465215151E-07
+INTERFERENCE Partition_bridge_1-1 / Hook_rear_drop-1 volume(m3)=1.6E-07
+INTERFERENCE Partition_bridge_1-1 / Smooth_pad_2-1 volume(m3)=1.6E-07
+INTERFERENCE Partition_moving_jaw_1-1 / Partition_M8_screw_1-1 volume(m3)=1.00530964914873E-07
+INTERFERENCE Partition_moving_jaw_0-1 / Partition_M8_screw_0-1 volume(m3)=1.00530964914873E-07
+INTERFERENCE 09_Rear_standoff_L-1 / 59_M4_captive_fastener_2-1 volume(m3)=5.02654824574367E-08
+INTERFERENCE 10_Rear_standoff_R-1 / 59_M4_captive_fastener_1-1 volume(m3)=5.02654824574367E-08
+INTERFERENCE 09_Rear_standoff_L-1 / 59_M4_captive_fastener_0-1 volume(m3)=5.02654824574367E-08
+INTERFERENCE 10_Rear_standoff_R-1 / 59_M4_captive_fastener_3-1 volume(m3)=5.02654824574367E-08
+INTERFERENCE 22_Optical_chamber-1 / 54_Strip_jam_home_sensor-1 volume(m3)=4E-08
+INTERFERENCE 25_Strip_datum_carrier-1 / 34_Calibration_tile-1 volume(m3)=8.00000000000002E-09
+Saved Luma_Retrofit.SLDASM warnings=0
+Saved Luma_Retrofit.SLDASM warnings=0
+Saved Luma_GA.SLDDRW warnings=0

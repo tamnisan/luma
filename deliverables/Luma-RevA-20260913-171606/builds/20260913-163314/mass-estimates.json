@@ -1,0 +1,20 @@
+{
+  "method": "Analytic nominal geometry with assumed densities and bounding centres; not SW mass certification",
+  "partitionDC": {
+    "mass": 5.389022778553093,
+    "cog": [
+      -0.4912822393104866,
+      170.1185547863086,
+      15.727331122177759
+    ]
+  },
+  "pedestalDC": {
+    "mass": 68.94980121504399,
+    "cog": [
+      0.008773757298740763,
+      -889.9568372582505,
+      2.4185291521134236
+    ]
+  },
+  "sketchExceptions": []
+}
