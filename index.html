@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Luma: Open-Source Urine Test Strip Reader for Public Toilets</title>
+<meta name="description" content="Free, open-source CAD for a urine test strip reader that retrofits into public toilets. View it in 3D in your browser or get STEP, STL and SolidWorks files.">
+<meta name="keywords" content="urine test strip reader, open source urinalysis device, urine analyzer CAD, smart toilet, public health kiosk, point-of-care diagnostics, open hardware, SolidWorks, STEP, STL, 3D printable enclosure, Arduino, TCS34725">
+<meta name="author" content="tamnisan">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#103a46">
+<link rel="canonical" href="https://tamnisan.github.io/luma/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23103a46'/%3E%3Crect x='18' y='12' width='28' height='40' rx='3' fill='none' stroke='%237fd0cf' stroke-width='4'/%3E%3Crect x='24' y='19' width='16' height='9' fill='%237fd0cf'/%3E%3C/svg%3E">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Luma Retrofit">
+<meta property="og:url" content="https://tamnisan.github.io/luma/">
+<meta property="og:title" content="Luma: Open-Source Urine Test Strip Reader for Public Toilets">
+<meta property="og:description" content="Open-source CAD for a removable urine test strip reader with six no-drill mounts. 3D viewer, STEP, STL and SolidWorks files. MIT licensed.">
+<meta property="og:image" content="https://tamnisan.github.io/luma/docs/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="Luma Retrofit urine test strip reader enclosure, 3D CAD render">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Luma: Open-Source Urine Test Strip Reader for Public Toilets">
+<meta name="twitter:description" content="Open-source CAD for a removable urine test strip reader with six no-drill mounts. 3D viewer, STEP, STL and SolidWorks files.">
+<meta name="twitter:image" content="https://tamnisan.github.io/luma/docs/social-preview.png">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebSite",
+      "@id": "https://tamnisan.github.io/luma/#website",
+      "url": "https://tamnisan.github.io/luma/",
+      "name": "Luma Retrofit",
+      "description": "Open-source CAD design for a urine test strip reader that retrofits into existing public toilets.",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "SoftwareSourceCode",
+      "@id": "https://tamnisan.github.io/luma/#project",
+      "name": "Luma Retrofit: open-source urine test strip reader CAD",
+      "description": "Parametric SolidWorks CAD for a removable urine test strip reflectance reader with six reversible mounts, DC or battery power, STEP and STL exports and an offline browser 3D viewer.",
+      "url": "https://tamnisan.github.io/luma/",
+      "codeRepository": "https://github.com/tamnisan/luma",
+      "license": "https://opensource.org/licenses/MIT",
+      "programmingLanguage": ["C#", "JavaScript", "PowerShell"],
+      "keywords": "urine test strip reader, urinalysis, smart toilet, public health kiosk, point-of-care diagnostics, open hardware, SolidWorks, STEP, STL, 3D printing, Arduino, TCS34725",
+      "image": "https://tamnisan.github.io/luma/docs/social-preview.png",
+      "author": {"@type": "Person", "name": "tamnisan", "url": "https://github.com/tamnisan"},
+      "dateModified": "2026-09-21",
+      "isPartOf": {"@id": "https://tamnisan.github.io/luma/#website"}
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "What is Luma Retrofit?", "acceptedAnswer": {"@type": "Answer", "text": "Luma Retrofit is an open-source CAD design for a removable urine test strip reader that can be added to existing public toilets using reversible mounts, without drilling, new wiring or plumbing."}},
+        {"@type": "Question", "name": "Can I open the CAD model without SolidWorks?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The model opens in any modern web browser through the included offline 3D viewer. STEP files work in FreeCAD, Fusion 360, Onshape and other CAD programs, and STL files work in any slicer. The native SolidWorks files need SolidWorks 2026 or newer."}},
+        {"@type": "Question", "name": "Is it free to use, modify and sell?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. The project is released under the MIT License, so you may use, modify, manufacture and sell it, including commercially, as long as you keep the copyright notice. It is provided as is, without warranty."}},
+        {"@type": "Question", "name": "Is Luma a certified medical device?", "acceptedAnswer": {"@type": "Answer", "text": "No. Luma is a Rev A engineering prototype. It is not a fabrication release and has not been clinically validated. Anyone who builds or deploys it is responsible for safety, structural and regulatory approval."}},
+        {"@type": "Question", "name": "What electronics does the reader use?", "acceptedAnswer": {"@type": "Answer", "text": "The design reserves space for an Arduino Uno controller, a TCS34725 RGB colour sensor and two white LEDs on a moving scan carriage, plus a display, status LED, buzzer and DC or battery power. Firmware is not part of the repository yet."}},
+        {"@type": "Question", "name": "Can I 3D print the enclosure?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every part is available as an STL file, and the enclosure parts are designed as PC-ABS prototype prints. Check the Process column in the bill of materials: parts named envelope are only space reservations for purchased components, and the mounts are designed in stainless steel."}},
+        {"@type": "Question", "name": "How do I change the dimensions?", "acceptedAnswer": {"@type": "Answer", "text": "Every part size and position is defined in the Layout table in src/LumaBuilder.cs. Edit it and run src/Build.ps1 with SolidWorks installed to rebuild the whole model, exports and viewer."}}
+      ]
+    }
+  ]
+}
+</script>
+
+<style>
+:root{--bg:#f4f8f9;--surface:#ffffff;--ink:#173b48;--muted:#557080;--line:#d7e4e7;--accent:#007b80;--accent-ink:#ffffff;--hero:#103a46;--hero-ink:#e8f3f4;--hero-muted:#b9d6db;--chip:#e6f2f3;--warn-bg:#fff4e6;--warn-line:#bd752d;--warn-ink:#6b3f10}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1b20;--surface:#13262c;--ink:#dcebee;--muted:#8fa9b1;--line:#23404a;--accent:#45b8b9;--accent-ink:#06282b;--hero:#0a171b;--hero-ink:#e1eff1;--hero-muted:#93b3ba;--chip:#1b333a;--warn-bg:#2b2114;--warn-line:#d08a3c;--warn-ink:#f1c793}}
+:root[data-theme="dark"]{--bg:#0d1b20;--surface:#13262c;--ink:#dcebee;--muted:#8fa9b1;--line:#23404a;--accent:#45b8b9;--accent-ink:#06282b;--hero:#0a171b;--hero-ink:#e1eff1;--hero-muted:#93b3ba;--chip:#1b333a;--warn-bg:#2b2114;--warn-line:#d08a3c;--warn-ink:#f1c793}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--accent)}
+img{max-width:100%;height:auto;display:block}
+.wrap{max-width:1120px;margin:0 auto;padding:0 16px}
+.nav{background:var(--hero);color:var(--hero-ink)}
+.nav .wrap{display:flex;align-items:center;gap:20px;min-height:60px;flex-wrap:wrap}
+.nav .brand{font-weight:700;color:var(--hero-ink);text-decoration:none;margin-right:auto;font-size:18px}
+.nav a{color:var(--hero-muted);text-decoration:none;font-size:15px}
+.nav a:hover{color:var(--hero-ink)}
+.hero{background:var(--hero);color:var(--hero-ink);padding:40px 0 64px}
+.hero .wrap{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:13px;font-weight:600;color:#7fd0cf}
+h1{font-size:clamp(34px,5vw,54px);line-height:1.08;letter-spacing:-1px;margin:12px 0 18px}
+.lead{font-size:19px;color:var(--hero-muted);margin:0 0 28px;max-width:560px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 20px;border-radius:10px;font-weight:600;text-decoration:none;font-size:16px;border:1px solid transparent}
+.btn.primary{background:#45b8b9;color:#06282b}
+.btn.ghost{border-color:rgba(255,255,255,.35);color:var(--hero-ink)}
+.btn:hover{filter:brightness(1.08)}
+.hero figure{margin:0;border-radius:18px;overflow:hidden;box-shadow:0 24px 48px rgba(0,0,0,.35)}
+.badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}
+.badges span{font-size:13px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)}
+section{padding:56px 0 8px}
+h2{font-size:clamp(26px,3.4vw,34px);letter-spacing:-.5px;margin:0 0 14px;line-height:1.2}
+h3{font-size:19px;margin:0 0 6px}
+.sub{color:var(--muted);max-width:760px;margin:0 0 28px}
+.notice{margin-top:-28px;background:var(--warn-bg);border-left:5px solid var(--warn-line);color:var(--warn-ink);padding:16px 20px;border-radius:10px;position:relative}
+.grid{display:grid;gap:18px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px}
+.card p{margin:0;color:var(--muted);font-size:16px}
+.mount{padding:0;overflow:hidden}
+.mount img{aspect-ratio:4/3;object-fit:cover;background:#e3edef}
+.mount div{padding:16px 18px 18px}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;font-size:16px}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+th{width:32%;color:var(--muted);font-weight:600}
+tr:last-child th,tr:last-child td{border-bottom:0}
+.dl .card{display:flex;flex-direction:column;gap:8px}
+.dl .card a.btn{align-self:flex-start;margin-top:auto;background:var(--accent);color:var(--accent-ink)}
+.tag{display:inline-block;font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;background:var(--chip);color:var(--ink)}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600;font-size:17px}
+details p{margin:10px 0 2px;color:var(--muted)}
+footer{margin-top:64px;padding:28px 0;border-top:1px solid var(--line);color:var(--muted);font-size:15px}
+footer .wrap{display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}
+@media (max-width:860px){.hero .wrap,.g2{grid-template-columns:1fr}.g3{grid-template-columns:1fr 1fr}.nav .links{display:none}}
+@media (max-width:560px){.g3{grid-template-columns:1fr}th{width:40%}}
+</style>
+</head>
+<body>
+
+<nav class="nav" aria-label="Main">
+  <div class="wrap">
+    <a class="brand" href="./">Luma Retrofit</a>
+    <span class="links"><a href="#features">Features</a> &nbsp; <a href="#mounts">Mounts</a> &nbsp; <a href="#download">Download</a> &nbsp; <a href="#faq">FAQ</a></span>
+    <a href="https://github.com/tamnisan/luma">GitHub</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Open-source hardware · CAD</div>
+      <h1>Open-source urine test strip reader for public toilets</h1>
+      <p class="lead">Luma Retrofit is a free, parametric CAD design for a removable urinalysis reader that fits existing toilets with six no-drill mounts. Explore it in 3D in your browser, or download STEP, STL and SolidWorks files.</p>
+      <div class="cta">
+        <a class="btn primary" href="START.html">Open the 3D model</a>
+        <a class="btn ghost" href="https://github.com/tamnisan/luma/archive/refs/heads/main.zip">Download ZIP</a>
+        <a class="btn ghost" href="https://github.com/tamnisan/luma">View on GitHub</a>
+      </div>
+      <div class="badges"><span>MIT licensed</span><span>SolidWorks 2026</span><span>STEP · STL</span><span>No install needed</span></div>
+    </div>
+    <figure><img src="docs/images/overview.png" width="960" height="720" alt="3D CAD model of the Luma urine test strip reader enclosure with display, sample drawer and service door"></figure>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="notice" role="note"><strong>Engineering prototype (Rev A), not a medical device.</strong> This design has not been clinically validated or load tested and is not a fabrication release. Anyone who builds or deploys it is responsible for safety and regulatory approval.</p>
+  </div>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>What is Luma Retrofit?</h2>
+      <p class="sub">Luma is a compact reflectance reader for urine test strips, designed as a retrofit health kiosk for public toilets that already exist. A user places a wetted strip in a disposable carrier. An RGB colour sensor with two white LEDs scans the pads, the result is shown privately on the display, and the used strip drops into a closed waste cartridge. Unused strips stay sealed in a separate cassette, away from the measurement path.</p>
+      <p class="sub">The model is generated by code: a C# program drives the SolidWorks API to build all 109 parts from a single dimension table, then checks the result. Everything is exported to open formats, so anyone can study, modify, 3D print or build on this point-of-care diagnostics concept without owning SolidWorks.</p>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <h2>Features</h2>
+      <div class="grid g3">
+        <div class="card"><h3>Retrofit, no drilling</h3><p>Six reversible mounts share one 180 × 260 mm adapter plate. No new holes, wiring or plumbing in the building.</p></div>
+        <div class="card"><h3>Open in any browser</h3><p>An offline 3D viewer with X-ray, part details and 18 configurations. Just double-click <code>START.html</code>.</p></div>
+        <div class="card"><h3>Open CAD formats</h3><p>A STEP assembly for every configuration, an STL for every part and the native SolidWorks model.</p></div>
+        <div class="card"><h3>Parametric and reproducible</h3><p>One layout table drives the whole design. A rebuild regenerates parts, assembly, exports and viewer.</p></div>
+        <div class="card"><h3>Checked on every build</h3><p>Zero static interferences in all 12 mount/power configurations and all 125 sketches fully constrained.</p></div>
+        <div class="card"><h3>Documented engineering</h3><p>Load cases, installer site survey, service sequence, material choices and cost allowances.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mounts">
+    <div class="wrap">
+      <h2>Six reversible mounting options</h2>
+      <p class="sub">The same reader enclosure attaches to whatever the site offers. Each mount comes with DC or battery power.</p>
+      <div class="grid g3">
+        <article class="card mount"><img src="docs/images/mount-partition.png" width="960" height="720" loading="lazy" alt="Rear view of the Luma reader with the partition clamp mount"><div><h3>Partition clamp</h3><p>Padded opposed jaws for 12–50 mm toilet cubicle partitions.</p></div></article>
+        <article class="card mount"><img src="docs/images/mount-rail.png" width="960" height="720" loading="lazy" alt="Rear view of the Luma reader with the rail clamp mount"><div><h3>Rail clamp</h3><p>Split clamp with elastomer inserts for a 32 mm post or rail.</p></div></article>
+        <article class="card mount"><img src="docs/images/mount-hook.png" width="960" height="720" loading="lazy" alt="Rear view of the Luma reader with the over-partition hook mount"><div><h3>Over-partition hook</h3><p>Padded hook over the top of a partition, 55 mm gap.</p></div></article>
+        <article class="card mount"><img src="docs/images/mount-pedestal.png" width="960" height="720" loading="lazy" alt="Luma reader on a free-standing floor pedestal"><div><h3>Floor pedestal</h3><p>Free-standing ballasted base, placed without anchors.</p></div></article>
+        <article class="card mount"><img src="docs/images/mount-smooth.png" width="960" height="720" loading="lazy" alt="Rear view of the Luma reader with removable smooth-surface pads"><div><h3>Smooth-surface pads</h3><p>Removable pads for glass or glazed tile, with a safety tether. Reserved concept.</p></div></article>
+        <article class="card mount"><img src="docs/images/mount-magnetic.png" width="960" height="720" loading="lazy" alt="Rear view of the Luma reader with magnetic pot mounts"><div><h3>Magnetic mount</h3><p>Magnet pots for structural steel, with a safety tether. Reserved concept.</p></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="inside">
+    <div class="wrap">
+      <h2>Inside the reader</h2>
+      <div class="grid g2">
+        <figure class="card mount" style="margin:0"><img src="docs/images/xray.png" width="960" height="720" loading="lazy" alt="X-ray view of the Luma urine strip reader showing electronics tray, optical chamber, strip cassette and waste cartridge"><div><h3>Internal layout</h3><p>Dry electronics at the top, the optical scan chamber in the centre, clean strips, sample drawer and waste cartridge below a wet/dry barrier.</p></div></figure>
+        <figure class="card mount" style="margin:0"><img src="docs/images/service-open.png" width="960" height="720" loading="lazy" alt="Luma reader with front covers removed for servicing"><div><h3>Front servicing</h3><p>Cassettes, trays and the waste cartridge are all removed from the front, so clean stock is never exposed to used strips.</p></div></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="download">
+    <div class="wrap">
+      <h2>Download the CAD files</h2>
+      <p class="sub">Pick the format that matches your software. Everything is in millimetres.</p>
+      <div class="grid g2 dl">
+        <div class="card"><span class="tag">Any browser</span><h3>Interactive 3D viewer</h3><p>Rotate, see inside with X-ray and inspect every part's material and size. Works offline.</p><a class="btn" href="START.html">Open viewer</a></div>
+        <div class="card"><span class="tag">FreeCAD · Fusion 360 · Onshape</span><h3>STEP assemblies</h3><p>One STEP AP214 file with colours for each mount and power configuration.</p><a class="btn" href="https://github.com/tamnisan/luma/tree/main/builds/20260913-163314/exports/step">STEP files</a></div>
+        <div class="card"><span class="tag">3D printing</span><h3>STL meshes</h3><p>One binary STL per part. Check the bill of materials for which parts are printed and which are bought.</p><a class="btn" href="https://github.com/tamnisan/luma/tree/main/builds/20260913-163314/exports/stl">STL files</a></div>
+        <div class="card"><span class="tag">SolidWorks 2026+</span><h3>Native parametric model</h3><p>The full assembly with 109 parts and every mount and power configuration, plus an exploded assembly and a drawing.</p><a class="btn" href="https://github.com/tamnisan/luma/tree/main/builds/20260913-163314">SolidWorks files</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="specs">
+    <div class="wrap">
+      <h2>Specifications</h2>
+      <table>
+        <tr><th scope="row">Enclosure</th><td>230 W × 330 H × 134 D mm; 150 mm projection with the rear adapter</td></tr>
+        <tr><th scope="row">Estimated dry mass</th><td>≈ 5.4 kg (partition clamp, DC power); analytic estimate, not a certified value</td></tr>
+        <tr><th scope="row">Electronics allowance</th><td>Arduino Uno, TCS34725 RGB colour sensor, two white LEDs, display, status LED, buzzer, fuse module</td></tr>
+        <tr><th scope="row">Optics</th><td>Black optical chamber, moving sensor/LED scan carriage on a lead-screw rail, calibration tile</td></tr>
+        <tr><th scope="row">Power</th><td>DC input with cable gland and strain relief, or a removable protected battery pack</td></tr>
+        <tr><th scope="row">Materials</th><td>PC-ABS enclosure, polypropylene wetted trays, 304 stainless steel mounts, EPDM seals and pads</td></tr>
+        <tr><th scope="row">Configurations</th><td>6 mounts × 2 power options, plus installed, service and exploded views</td></tr>
+        <tr><th scope="row">License</th><td>MIT: free to use, modify, manufacture and sell</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2>Frequently asked questions</h2>
+      <details open><summary>What is Luma Retrofit?</summary><p>Luma Retrofit is an open-source CAD design for a removable urine test strip reader that can be added to existing public toilets using reversible mounts, without drilling, new wiring or plumbing.</p></details>
+      <details><summary>Can I open the CAD model without SolidWorks?</summary><p>Yes. The model opens in any modern web browser through the included offline 3D viewer. STEP files work in FreeCAD, Fusion 360, Onshape and other CAD programs, and STL files work in any slicer. The native SolidWorks files need SolidWorks 2026 or newer.</p></details>
+      <details><summary>Is it free to use, modify and sell?</summary><p>Yes. The project is released under the MIT License, so you may use, modify, manufacture and sell it, including commercially, as long as you keep the copyright notice. It is provided as is, without warranty.</p></details>
+      <details><summary>Is Luma a certified medical device?</summary><p>No. Luma is a Rev A engineering prototype. It is not a fabrication release and has not been clinically validated. Anyone who builds or deploys it is responsible for safety, structural and regulatory approval.</p></details>
+      <details><summary>What electronics does the reader use?</summary><p>The design reserves space for an Arduino Uno controller, a TCS34725 RGB colour sensor and two white LEDs on a moving scan carriage, plus a display, status LED, buzzer and DC or battery power. Firmware is not part of the repository yet.</p></details>
+      <details><summary>Can I 3D print the enclosure?</summary><p>Yes. Every part is available as an STL file, and the enclosure parts are designed as PC-ABS prototype prints. Check the Process column in the bill of materials: parts named envelope are only space reservations for purchased components, and the mounts are designed in stainless steel.</p></details>
+      <details><summary>How do I change the dimensions?</summary><p>Every part size and position is defined in the Layout table in <code>src/LumaBuilder.cs</code>. Edit it and run <code>src/Build.ps1</code> with SolidWorks installed to rebuild the whole model, exports and viewer.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 tamnisan · Released under the <a href="https://github.com/tamnisan/luma/blob/main/LICENSE">MIT License</a></span>
+    <span><a href="https://github.com/tamnisan/luma">Source on GitHub</a> · <a href="https://github.com/tamnisan/luma/blob/main/ENGINEERING.md">Engineering notes</a> · <a href="https://github.com/tamnisan/luma/issues">Report an issue</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

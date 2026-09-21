@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this design, please cite it as below."
+type: software
+title: "Luma Retrofit: open-source urine test strip reader CAD for public toilets"
+abstract: >-
+  Parametric SolidWorks CAD for a removable urine test strip reflectance reader
+  that retrofits into existing public toilets with six reversible mounts and DC
+  or battery power. Includes STEP and STL exports, an offline browser 3D viewer
+  and a documented engineering record. Engineering prototype, Rev A; not a
+  medical device.
+authors:
+  - name: "tamnisan"
+repository-code: "https://github.com/tamnisan/luma"
+url: "https://tamnisan.github.io/luma/"
+license: MIT
+version: "Rev A"
+date-released: "2026-09-21"
+keywords:
+  - urine test strip reader
+  - urinalysis
+  - point-of-care diagnostics
+  - public health
+  - smart toilet
+  - open hardware
+  - CAD
+  - SolidWorks
+  - STEP
+  - STL
+  - 3D printing
+  - Arduino
