@@ -34,7 +34,7 @@ foreach($stage in $stages) {
 }
 $node = (Get-Command node -ErrorAction SilentlyContinue).Source
 if(!$node){ Write-Warning 'Node.js not found on PATH; skipped Audit.js, Viewer.js and Report.js (install from https://nodejs.org).'; return }
-foreach($script in @('Audit.js','Viewer.js','Report.js')){
+foreach($script in @('Audit.js','Viewer.js','Report.js','Guide.js')){
     & $node "$PSScriptRoot\$script" $run
     if($LASTEXITCODE -ne 0){throw "$script failed"}
 }

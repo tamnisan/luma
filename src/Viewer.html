@@ -169,11 +169,19 @@ function material(c){const info=M.parts[c.part].info||{},mat=(info.material||'')
 // State
 let meshes=[],selected=null,hovered=null,isolated=false,xray=false,edges=true,current=null;
 const hidden=new Set();
+// Highlighted parts from a link such as Viewer.html#Partition_DC/13_Controller_UNO_envelope,14_Dual_power_fuse_module:
+// they stay solid and everything else turns to glass, to show where a part sits in the assembly.
+let focus=new Set();
+const parseHash=()=>{const [cfg,parts]=decodeURIComponent(location.hash.slice(1)).split('/');return {cfg,parts:parts?parts.split(',').filter(Boolean):[]};};
+const ghosted=m=>m!==selected&&((xray&&HOUSING.test(m.userData.c.part))||(focus.size>0&&!focus.has(m.userData.c.part)));
+function setHash(){history.replaceState(null,'','#'+current.name+(focus.size?'/'+[...focus].join(','):''));}
+function clearFocus(){if(!focus.size)return;focus.clear();setHash();applyDisplay();showInfo();}
 
-function load(name,refit){
+function load(name,refit,focusParts){
  const cfg=M.configurations.find(c=>c.name===name)||M.configurations[0];current=cfg;sel.value=cfg.name;
  for(const m of meshes){m.material.dispose();root.remove(m);}
  meshes=[];selected=null;hovered=null;isolated=false;hidden.clear();
+ focus=new Set((focusParts||[]).filter(p=>cfg.components.some(c=>c.part===p)));
  const seen={};
  for(const c of cfg.components){if(!M.parts[c.part])continue;const mesh=new THREE.Mesh(geometry(c.part),material(c));mesh.matrixAutoUpdate=false;mesh.matrix.fromArray(c.e);mesh.userData.c=c;seen[c.part]=(seen[c.part]||0)+1;mesh.userData.n=seen[c.part];
   const e=new THREE.LineSegments(edgeGeometry(c.part),edgeMat);e.visible=edges;e.raycast=()=>{};mesh.add(e);mesh.userData.edges=e;root.add(mesh);meshes.push(mesh);}
@@ -181,10 +189,10 @@ function load(name,refit){
  root.updateMatrixWorld(true);
  applyDisplay();buildList();showInfo();placeGrid();
  if(refit)fit(null,false);
- history.replaceState(null,'','#'+cfg.name);request();
+ setHash();request();
 }
 function visibleMeshes(){return meshes.filter(m=>m.visible);}
-function applyDisplay(){for(const m of meshes){const b=m.material.userData.base,housing=HOUSING.test(m.userData.c.part),ghost=xray&&housing&&m!==selected;
+function applyDisplay(){for(const m of meshes){const b=m.material.userData.base,ghost=ghosted(m);
   m.visible=!hidden.has(m)&&(!isolated||m===selected);
   m.material.transparent=ghost||b.transparent;m.material.opacity=ghost?0.14:b.opacity;m.material.depthWrite=ghost?false:b.depthWrite;m.renderOrder=ghost?2:0;
   m.material.emissive.setHex(m===selected?0x0b6570:m===hovered?0x0a3540:0x000000);
@@ -211,7 +219,7 @@ function step(now){if(!anim)return;const k=Math.min((now-anim.t0)/450,1),e=k<.5?
 // Picking
 const ray=new THREE.Raycaster(),ndc=new THREE.Vector2();
 function pick(ev){const r=renderer.domElement.getBoundingClientRect();ndc.set((ev.clientX-r.left)/r.width*2-1,-(ev.clientY-r.top)/r.height*2+1);ray.setFromCamera(ndc,camera);
- const hits=ray.intersectObjects(visibleMeshes(),false);for(const h of hits){const m=h.object;if(xray&&HOUSING.test(m.userData.c.part)&&m!==selected)continue;return m;}return null;}
+ const hits=ray.intersectObjects(visibleMeshes(),false);for(const h of hits){const m=h.object;if(ghosted(m))continue;return m;}return null;}
 let down=null;
 renderer.domElement.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY};});
 renderer.domElement.addEventListener('pointerup',e=>{if(down&&Math.hypot(e.clientX-down.x,e.clientY-down.y)<5&&e.button===0)select(pick(e));down=null;});
@@ -227,7 +235,8 @@ function select(m){selected=m;if(!m&&isolated)isolated=false;applyDisplay();show
 // Side panel
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function showInfo(){const el=$('info');
- if(!selected){const n=meshes.length,h=meshes.filter(m=>!m.visible).length;el.innerHTML=`<h2>${esc(label(current.name))}</h2><div class="muted">SolidWorks configuration <b>${esc(current.name)}</b></div>${current.description&&current.description!==current.name?`<p class="muted" style="margin:8px 0 0">${esc(current.description)}</p>`:''}<dl><dt>Components</dt><dd>${n}${h?` (${h} hidden)`:''}</dd><dt>Units</dt><dd>millimetres</dd></dl><p class="muted" style="margin:10px 0 0">Click a part in the model or the list below for its material and size.</p>`;return;}
+ if(!selected){const n=meshes.length,h=meshes.filter(m=>!m.visible).length;el.innerHTML=`<h2>${esc(label(current.name))}</h2><div class="muted">SolidWorks configuration <b>${esc(current.name)}</b></div>${current.description&&current.description!==current.name?`<p class="muted" style="margin:8px 0 0">${esc(current.description)}</p>`:''}<dl><dt>Components</dt><dd>${n}${h?` (${h} hidden)`:''}</dd><dt>Units</dt><dd>millimetres</dd></dl>${focus.size?`<p style="margin:10px 0 0"><b>Highlighted:</b> ${[...focus].map(p=>esc(pretty(p))).join(', ')}</p><div class="actions"><button class="btn primary" id="unfocus">Show everything</button></div>`:`<p class="muted" style="margin:10px 0 0">Click a part in the model or the list below for its material and size.</p>`}`;
+  if(focus.size)$('unfocus').onclick=clearFocus;return;}
  const c=selected.userData.c,i=M.parts[c.part].info||{};
  el.innerHTML=`<h2>${esc(selected.userData.label)}</h2><div class="muted">${esc(partGroup(c.part))}</div><dl>${i.material?`<dt>Material</dt><dd>${esc(i.material)}</dd>`:''}${i.process?`<dt>Process</dt><dd>${esc(i.process)}</dd>`:''}${i.envelope?`<dt>Envelope</dt><dd>${esc(i.envelope)}</dd>`:''}${i.group&&!i.material?`<dt>Note</dt><dd>${esc(i.group)}</dd>`:''}<dt>CAD file</dt><dd>parts/${esc(c.part)}.SLDPRT</dd><dt>Mesh</dt><dd>exports/stl/${esc(c.part)}.stl</dd></dl><div class="actions"><button class="btn primary" id="iso">${isolated?'Show all':'Isolate'}</button><button class="btn" id="hide">Hide</button><button class="btn" id="zoom">Zoom to</button><button class="btn" id="clear">Clear</button></div>`;
  $('iso').onclick=()=>{isolated=!isolated;applyDisplay();showInfo();markList();fit(null,true,isolated?selected:null);};
@@ -244,7 +253,7 @@ function buildList(){const ul=$('list');ul.innerHTML='';const by={};for(const m 
 function markList(){for(const li of document.querySelectorAll('li.part')){li.classList.toggle('sel',li._m===selected);li.classList.toggle('off',!li._m.visible);}}
 function filter(){const q=$('q').value.trim().toLowerCase();const shown={};for(const li of document.querySelectorAll('li.part')){const ok=!q||li._m.userData.label.toLowerCase().includes(q)||((M.parts[li._m.userData.c.part].info||{}).material||'').toLowerCase().includes(q);li.hidden=!ok;if(ok)shown[li.dataset.group]=1;}for(const h of document.querySelectorAll('li.group'))h.hidden=!shown[h.dataset.group];}
 $('q').oninput=filter;
-$('showAll').onclick=()=>{hidden.clear();isolated=false;applyDisplay();markList();showInfo();};
+$('showAll').onclick=()=>{hidden.clear();isolated=false;focus.clear();setHash();applyDisplay();markList();showInfo();};
 
 // Toolbar
 for(const b of document.querySelectorAll('[data-view]'))b.onclick=()=>fit(VIEWS[b.dataset.view]);
@@ -256,16 +265,16 @@ $('edges').onclick=()=>setEdges(!edges);
 $('panelBtn').onclick=()=>{const on=document.body.classList.toggle('panel');$('panelBtn').setAttribute('aria-pressed',on);};
 $('shot').onclick=()=>{scene.background=new THREE.Color(css('--bg'));renderer.render(scene,camera);const a=document.createElement('a');a.download='luma-'+current.name+'.png';a.href=renderer.domElement.toDataURL('image/png');a.click();scene.background=null;request();};
 sel.onchange=()=>load(sel.value,true);
-window.addEventListener('hashchange',()=>{const n=decodeURIComponent(location.hash.slice(1));if(n&&n!==current.name&&M.configurations.some(c=>c.name===n))load(n,true);});
+window.addEventListener('hashchange',()=>{const h=parseHash();if(h.cfg&&M.configurations.some(c=>c.name===h.cfg)&&(h.cfg!==current.name||h.parts.join()!==[...focus].join()))load(h.cfg,true,h.parts);});
 window.addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea')||e.ctrlKey||e.metaKey||e.altKey)return;const k=e.key.toLowerCase();
- if(k==='f')fit(null);else if(k==='x')setXray(!xray);else if(k==='e')setEdges(!edges);else if(k==='escape')select(null);else if(k==='h'&&selected){hidden.add(selected);select(null);}
+ if(k==='f')fit(null);else if(k==='x')setXray(!xray);else if(k==='e')setEdges(!edges);else if(k==='escape'){if(selected)select(null);else clearFocus();}else if(k==='h'&&selected){hidden.add(selected);select(null);}
  else if('12345'.includes(k)&&k.length===1)fit(Object.values(VIEWS)[+k-1]);});
 matchMedia('(prefers-color-scheme: dark)').addEventListener('change',()=>{edgeMat.color.set(css('--edge'));placeGrid();request();});
 
 // Start
-const first=decodeURIComponent(location.hash.slice(1));
+const first=parseHash();
 resize();
-load(M.configurations.some(c=>c.name===first)?first:(M.configurations.find(c=>c.name==='Partition_DC')||M.configurations[0]).name,false);
+load(M.configurations.some(c=>c.name===first.cfg)?first.cfg:(M.configurations.find(c=>c.name==='Partition_DC')||M.configurations[0]).name,false,first.parts);
 fit(VIEWS.iso,false);
 $('loading').style.display='none';
 (function loop(now){requestAnimationFrame(loop);step(now);if(controls.update())needs=true;if(needs){needs=false;renderer.render(scene,camera);}})(performance.now());
